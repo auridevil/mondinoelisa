@@ -61,6 +61,7 @@
   justify-content: space-between;
   gap: 2rem;
   padding: 1.75rem var(--space-page);
+  border-bottom: 1px solid var(--line);
   position: relative;
   z-index: 30;
   /* The transition turns scroll-driven translateY into a soft glide. */
@@ -79,10 +80,10 @@
 }
 
 .logo__name {
-  font-weight: 500;
-  font-size: 1.05rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
 }
 
 .logo__role {

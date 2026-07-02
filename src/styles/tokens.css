@@ -2,10 +2,11 @@
 
 :root {
   --font-sans: 'Satoshi', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-serif: 'Zodiak', 'Times New Roman', Georgia, serif;
 
-  --black: #0a0a0a;
-  --white: #ffffff;
-  --grey: #8a8a8a;
+  --black: #141412;
+  --white: #f7f4ee; /* warm gallery paper instead of pure white */
+  --grey: #8a867e;
 
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-reveal: 0.9s;

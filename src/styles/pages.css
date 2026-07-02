@@ -1,103 +1,204 @@
 /* Page-specific styles: home, work listings, project, press, contact. */
 
-/* ---------- Home collage ----------
- * Images scattered on a 12-column grid. Position, width, vertical offset
- * and aspect ratio come from custom properties set inline by Home.tsx with
- * random values on every page load; the :nth-child rules below are the
- * deterministic fallback used in the prerendered HTML (and without JS).
- */
+/* ---------- Home: opening statement ---------- */
 
-.collage {
+.statement {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.statement__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.statement__text {
+  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+  font-weight: 300;
+  max-width: 18ch;
+}
+
+.statement__text em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* ---------- Home: editorial project rows ---------- */
+
+.editorial {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+  padding: 4rem 0 2rem;
+}
+
+.edit-row {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 4.5rem 2rem;
-  align-items: start;
-  padding-top: 1.5rem;
+  grid-template-columns: 4rem 1fr 1fr;
+  gap: 2rem 3.5rem;
+  align-items: center;
 }
 
-.collage__item {
-  grid-column: var(--col, 1 / span 6);
-  margin-top: var(--offset, 0);
-  /* Scroll/cursor-driven transforms chase their target through this
-     transition → everything glides with a soft lag. */
-  transition: transform 0.9s var(--ease-soft);
-  will-change: transform;
-}
-
-.collage__item .card__media {
-  aspect-ratio: var(--ratio, 3 / 2);
-}
-
-/* Slow idle float so the collage breathes even without input. */
-.collage .card {
-  display: block;
-  animation: floaty var(--float-dur, 9s) ease-in-out var(--float-delay, 0s)
-    infinite;
-}
-
-@keyframes floaty {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .collage .card {
-    animation: none;
-  }
-}
-
-/* Fallback displacement before JS assigns random positions. */
-.collage__item:nth-child(4n + 2) {
-  --col: 8 / span 5;
-  --offset: 6rem;
-  --ratio: 3 / 4;
-}
-
-.collage__item:nth-child(4n + 3) {
-  --col: 4 / span 5;
-  --offset: -4rem;
-  --ratio: 1 / 1;
-}
-
-.collage__item:nth-child(4n + 4) {
-  --col: 9 / span 3;
-  --offset: -2rem;
-  --ratio: 2 / 3;
-}
-
-/* Captions on the home collage: tiny, and revealed only on hover. */
-.collage .card__meta {
-  opacity: 0;
-  transition: opacity 0.45s var(--ease-soft);
-}
-
-.collage .card:hover .card__meta {
+.edit-row:hover {
   opacity: 1;
 }
 
-.collage .card__title {
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
+/* Alternate: image and text swap sides on even rows. */
+.editorial > :nth-child(even) .edit-row__media {
+  order: 3;
 }
 
-.collage .card__sub {
-  font-size: 0.58rem;
+.edit-row__num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--muted);
+  align-self: start;
+  padding-top: 0.5rem;
+}
+
+.edit-row__media {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.edit-row__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease-soft);
+}
+
+.edit-row:hover .edit-row__media img {
+  transform: scale(1.05);
+}
+
+.edit-row__kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.edit-row__title {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 300;
+  margin-bottom: 1rem;
+  transition: font-style 0.2s;
+}
+
+.edit-row:hover .edit-row__title {
+  font-style: italic;
+}
+
+.edit-row__excerpt {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 38ch;
+}
+
+@media (max-width: 820px) {
+  .edit-row {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .editorial {
+    gap: 5rem;
+  }
+
+  .edit-row__num {
+    padding: 0;
+  }
+
+  .editorial > :nth-child(even) .edit-row__media {
+    order: 0;
+  }
+}
+
+/* ---------- Work: typographic index ---------- */
+
+.index {
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.index__row {
+  display: grid;
+  grid-template-columns: 4rem 1fr auto;
+  align-items: baseline;
+  gap: 2rem;
+  padding: 1.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.index__row:hover {
+  opacity: 1;
+}
+
+.index__num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--muted);
+}
+
+.index__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.05;
+  transition: transform 0.5s var(--ease-soft), font-style 0.2s;
+}
+
+.index__row:hover .index__title {
+  font-style: italic;
+  transform: translateX(0.75rem);
+}
+
+.index__meta {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Floating image that follows the cursor over the index. */
+.index__preview {
+  position: fixed;
+  width: min(24rem, 30vw);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 15;
+  transform: translate(-50%, -55%) scale(0.94);
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-soft), transform 0.45s var(--ease-soft);
+}
+
+.index__preview--on {
+  opacity: 1;
+  transform: translate(-50%, -55%) scale(1);
+}
+
+@media (hover: none) {
+  .index__preview {
+    display: none;
+  }
 }
 
 @media (max-width: 720px) {
-  .collage {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+  .index__row {
+    grid-template-columns: 2.5rem 1fr;
   }
 
-  .collage__item {
-    grid-column: 1 / -1 !important;
-    margin-top: 0 !important;
+  .index__meta {
+    grid-column: 2;
   }
 }
 
@@ -413,8 +514,11 @@ a.press__row:hover {
 }
 
 .press__title {
-  font-size: inherit;
-  font-weight: 400;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .press__arrow {

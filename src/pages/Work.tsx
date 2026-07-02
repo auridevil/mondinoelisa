@@ -1,12 +1,26 @@
+import { useRef, useState, type MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { Head } from 'vite-react-ssg'
 import { Reveal } from '../components/Reveal'
-import { ProjectCard } from '../components/ProjectCard'
 import { visibleCategories } from '../content/categories'
-import { projectsByCategory } from '../lib/content'
+import { projects } from '../lib/content'
 
-/** Overview of all work, grouped by category. */
+/**
+ * "Atelier" concept — the works as a big typographic index.
+ * Hovering a line makes that project's image float and follow the
+ * cursor (hidden on touch devices, where the lines simply link).
+ */
 export default function Work() {
+  const [preview, setPreview] = useState<string | null>(null)
+  const previewRef = useRef<HTMLImageElement>(null)
+
+  const onMove = (e: MouseEvent) => {
+    const img = previewRef.current
+    if (!img) return
+    img.style.left = `${e.clientX}px`
+    img.style.top = `${e.clientY}px`
+  }
+
   return (
     <>
       <Head>
@@ -14,7 +28,7 @@ export default function Work() {
       </Head>
 
       <Reveal>
-        <h1 className="page__title">Lavori</h1>
+        <h1 className="page__title">Indice</h1>
       </Reveal>
 
       <nav className="subnav" aria-label="Categorie">
@@ -25,26 +39,40 @@ export default function Work() {
         ))}
       </nav>
 
-      {visibleCategories.map((c) => {
-        const items = projectsByCategory(c.slug)
-        if (items.length === 0) return null
-        return (
-          <section key={c.slug} className="section">
-            <Reveal>
-              <h2 className="section__label">
-                <Link to={`/lavori/${c.slug}`}>{c.label}</Link>
-              </h2>
+      <ol className="index" onMouseMove={onMove}>
+        {projects.map((p, i) => {
+          const category = visibleCategories.find((c) => c.slug === p.category)
+          return (
+            <Reveal key={p.slug} delay={i * 40}>
+              <li>
+                <Link
+                  to={`/lavori/${p.category}/${p.slug}`}
+                  className="index__row"
+                  onMouseEnter={() => setPreview(p.cover)}
+                  onMouseLeave={() => setPreview(null)}
+                >
+                  <span className="index__num">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="index__title">{p.title}</span>
+                  <span className="index__meta">
+                    {category?.label} · {p.location} · {p.year}
+                  </span>
+                </Link>
+              </li>
             </Reveal>
-            <div className="grid">
-              {items.map((p, i) => (
-                <Reveal key={p.slug} delay={i * 80}>
-                  <ProjectCard project={p} />
-                </Reveal>
-              ))}
-            </div>
-          </section>
-        )
-      })}
+          )
+        })}
+      </ol>
+
+      {/* Floating preview that follows the cursor. */}
+      <img
+        ref={previewRef}
+        src={preview ?? undefined}
+        alt=""
+        aria-hidden="true"
+        className={`index__preview${preview ? ' index__preview--on' : ''}`}
+      />
     </>
   )
 }
