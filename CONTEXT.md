@@ -86,7 +86,8 @@ src/
 - [ ] Confirm Instagram handle URL.
 - [ ] About/bio copy for Elisa if a dedicated page is wanted.
 - [ ] Decide whether to license & self-host Satoshi vs. Fontshare CDN.
-- [ ] Set up the GitHub Pages repo + Actions deploy.
+- [x] Set up the GitHub Pages repo + Actions deploy → https://github.com/auridevil/mondinoelisa (public), Pages build_type=workflow, custom domain set to mondinoelisa.it.
+- [ ] **DNS**: mondinoelisa.it currently points to Squarespace (198.49.23.x / 198.185.159.x). To go live, point it to GitHub Pages: A records 185.199.108.153 / .109. / .110. / .111. (+ optional AAAA), then enable "Enforce HTTPS" in repo settings.
 
 ## Decisions log
 - 2026-07-02: Chose `vite-react-ssg` over Next.js/Astro to keep it lightweight React with true compile-time HTML and minimal config.
