@@ -22,10 +22,12 @@ export default function Layout() {
 
   // On project pages the hero image extends under the logo/menu; each
   // project's frontmatter (`header: white | black`) sets their color.
+  // On home the zapper takes the whole screen, so the nav floats there too.
   const clean = pathname.replace(/\/$/, '') || '/'
   const project = projects.find(
     (p) => clean === `/lavori/${p.category}/${p.slug}`,
   )
+  const overlay = project ? project.header : clean === '/' ? 'white' : null
 
   // Always open a page from the top.
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function Layout() {
   }, [pathname])
 
   const classes = ['site', `theme-${theme}`]
-  if (project) classes.push('site--overlay', `site--overlay-${project.header}`)
+  if (overlay) classes.push('site--overlay', `site--overlay-${overlay}`)
 
   return (
     <div className={classes.join(' ')}>
@@ -44,6 +46,10 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      {/* Fixed technical HUD, vertical along the left edge. */}
+      <div className="hud" aria-hidden="true">
+        EM / portfolio — 44.5510°N 7.7229°E — Fossano, IT
+      </div>
     </div>
   )
 }

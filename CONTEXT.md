@@ -93,6 +93,15 @@ src/
   3. Re-add the custom domain: `gh api -X PUT repos/auridevil/mondinoelisa/pages -f cname=mondinoelisa.it`.
   4. Enable "Enforce HTTPS" in repo Pages settings once the certificate is issued.
 
+## Branch: concept-hyper
+Maximum push (user: "hyperradicalbold cutting edge"), built on concept-radical:
+- **Home = channel zapper**: full-viewport interface. Mouse X scrubs through all projects (instant image snap, no fade), title decodes glitch-style (`useScramble`), auto-zaps every 4s when idle, channel numbers bottom-right, click enters the project. Nav floats over it.
+- **Tilted inverse marquee** (-5°, white strip, serif italic) slicing the screen.
+- **Titles in Satoshi Black (900)** at 13vw uppercase, difference-blend.
+- **Index photo-fill**: hovering an index line fills the outline letters with that project's photo (`background-clip: text`).
+- **Technical HUD**: fixed vertical microtext with coordinates along the left edge.
+- Keeps radical's grain + difference cursor + outline index + giant contact.
+
 ## Branch: concept-radical
 Cutting-edge take built on top of the Atelier concept (user: "more free, more daring"):
 - **Kinetic type intro** on home: three marquee lines (name / role / categories) scrolling against each other, full viewport.

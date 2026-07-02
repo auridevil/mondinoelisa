@@ -48,6 +48,7 @@ export default function Work() {
                 <Link
                   to={`/lavori/${p.category}/${p.slug}`}
                   className="index__row"
+                  style={{ '--img': `url(${p.cover})` } as React.CSSProperties}
                   onMouseEnter={() => setPreview(p.cover)}
                   onMouseLeave={() => setPreview(null)}
                 >

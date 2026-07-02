@@ -1,15 +1,6 @@
 /* Page-specific styles: home, work listings, project, press, contact. */
 
-/* ---------- Home: kinetic type intro ---------- */
-
-.kinetic {
-  min-height: calc(100svh - 12rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  overflow: hidden;
-}
+/* ---------- Marquee (shared) ---------- */
 
 .marquee {
   overflow: hidden;
@@ -32,90 +23,123 @@
   }
 }
 
-.kinetic__line--name {
-  font-family: var(--font-serif);
-  font-weight: 300;
-  font-size: clamp(4rem, 13vw, 12rem);
-  line-height: 1;
-  --marquee-dur: 26s;
-}
-
-.kinetic__line--role {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(1.6rem, 4.5vw, 3.6rem);
-  color: var(--muted);
-  --marquee-dur: 34s;
-}
-
-.kinetic__line--cats {
-  font-size: clamp(0.8rem, 1.6vw, 1.1rem);
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  --marquee-dur: 40s;
-}
-
-/* ---------- Home: full-screen project deck ----------
- * Every panel is sticky at the top of the viewport, so while scrolling
- * each project slides over the previous one like a deck of cards.
+/* ---------- Home: full-screen channel zapper ----------
+ * The whole viewport is the interface: mouse X scrubs through the
+ * projects, the active cover snaps in with no fade (channel zap),
+ * the title decodes itself, a tilted inverse strip slices the screen.
  */
 
-.deck__panel {
-  position: sticky;
-  top: 0;
-  display: block;
+.zapper {
+  position: relative;
   height: 100svh;
   overflow: hidden;
+  background: var(--black);
 }
 
-.deck__panel img {
+.zapper__img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1);
-  transition: filter 0.9s var(--ease-soft), transform 6s var(--ease-soft);
+  visibility: hidden; /* instant switch — no crossfade, it's a zap */
 }
 
-.deck__panel:hover img {
-  filter: grayscale(0);
-  transform: scale(1.04);
+.zapper__img--on {
+  visibility: visible;
 }
 
-/* Huge titles inverting over the photography. */
-.deck__title {
+.zapper__link {
   position: absolute;
-  bottom: 4rem;
-  left: var(--space-page);
-  max-width: 90vw;
-  font-size: clamp(3rem, 10vw, 9rem);
-  font-weight: 300;
-  line-height: 0.95;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--space-page) 7rem;
+  z-index: 3;
+}
+
+.zapper__link:hover {
+  opacity: 1;
+}
+
+.zapper__title {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: clamp(3rem, 13vw, 12rem);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
   color: #fff;
   mix-blend-mode: difference;
+  word-break: break-word;
 }
 
-.deck__panel:nth-child(even) .deck__title {
-  left: auto;
-  right: var(--space-page);
-  bottom: auto;
-  top: 5.5rem;
-  text-align: right;
-  font-style: italic;
-}
-
-.deck__num {
-  position: absolute;
-  top: 50%;
-  right: 1.25rem;
-  transform: rotate(90deg) translateX(-50%);
-  transform-origin: right center;
-  font-size: 0.7rem;
+.zapper__meta {
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: #fff;
   mix-blend-mode: difference;
+}
+
+/* Tilted inverse strip. */
+.zapper__strip {
+  position: absolute;
+  top: 38%;
+  left: -10vw;
+  width: 120vw;
+  transform: rotate(-5deg);
+  z-index: 2;
+  background: var(--white);
+  color: var(--black);
+  padding: 0.4rem 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.6rem);
+  --marquee-dur: 26s;
+  pointer-events: none;
+}
+
+/* Channel numbers. */
+.zapper__channels {
+  position: absolute;
+  right: var(--space-page);
+  bottom: 2.2rem;
+  display: flex;
+  gap: 1.1rem;
+  z-index: 4;
+}
+
+.zapper__channels button {
+  all: unset;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: #fff;
+  mix-blend-mode: difference;
+  padding: 0.15rem 0.3rem;
+  transition: opacity 0.2s;
+}
+
+.zapper__channels button:not(.is-on) {
+  opacity: 0.45;
+}
+
+.zapper__channels button.is-on {
+  outline: 1px solid #fff;
+}
+
+@media (max-width: 720px) {
+  .zapper__link {
+    padding-bottom: 8.5rem;
+  }
+
+  .zapper__channels {
+    left: var(--space-page);
+    right: auto;
+  }
 }
 
 /* ---------- Home: closing marquee link ---------- */
@@ -175,7 +199,14 @@
 }
 
 .index__row:hover .index__title {
-  color: var(--fg);
+  /* The project photo fills the letters. */
+  background-image: var(--img);
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 0;
   font-style: italic;
   transform: translateX(0.75rem);
 }
