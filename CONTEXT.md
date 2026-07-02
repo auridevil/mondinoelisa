@@ -83,7 +83,7 @@ src/
 - [ ] Real project photography (currently picsum placeholders keyed by slug).
 - [ ] Real project copy/metadata (invented for the draft).
 - [ ] Real press articles + links.
-- [ ] Confirm Instagram handle URL.
+- [x] Instagram: https://www.instagram.com/elisamondino_interiordesign/ (confirmed by user).
 - [ ] About/bio copy for Elisa if a dedicated page is wanted.
 - [ ] Decide whether to license & self-host Satoshi vs. Fontshare CDN.
 - [x] Set up the GitHub Pages repo + Actions deploy → https://github.com/auridevil/mondinoelisa (public), Pages build_type=workflow.
