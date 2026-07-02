@@ -1,0 +1,31 @@
+/* Design tokens — strict black & white palette. */
+
+:root {
+  --font-sans: 'Satoshi', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --grey: #8a8a8a;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-reveal: 0.9s;
+  --dur-page: 0.6s;
+
+  --space-page: clamp(1.25rem, 4vw, 4rem);
+  --max-content: 1280px;
+}
+
+/* Some pages are white, some are black — set per route on the .site wrapper. */
+.theme-light {
+  --bg: var(--white);
+  --fg: var(--black);
+  --muted: var(--grey);
+  --line: rgba(0, 0, 0, 0.12);
+}
+
+.theme-dark {
+  --bg: var(--black);
+  --fg: var(--white);
+  --muted: #9a9a9a;
+  --line: rgba(255, 255, 255, 0.18);
+}

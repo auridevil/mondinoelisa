@@ -1,0 +1,451 @@
+/* Page-specific styles: home, work listings, project, press, contact. */
+
+/* ---------- Home collage ----------
+ * Images scattered on a 12-column grid. Position, width, vertical offset
+ * and aspect ratio come from custom properties set inline by Home.tsx with
+ * random values on every page load; the :nth-child rules below are the
+ * deterministic fallback used in the prerendered HTML (and without JS).
+ */
+
+.collage {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 4.5rem 2rem;
+  align-items: start;
+  padding-top: 1.5rem;
+}
+
+.collage__item {
+  grid-column: var(--col, 1 / span 6);
+  margin-top: var(--offset, 0);
+  /* Scroll/cursor-driven transforms chase their target through this
+     transition → everything glides with a soft lag. */
+  transition: transform 0.9s var(--ease-soft);
+  will-change: transform;
+}
+
+.collage__item .card__media {
+  aspect-ratio: var(--ratio, 3 / 2);
+}
+
+/* Slow idle float so the collage breathes even without input. */
+.collage .card {
+  display: block;
+  animation: floaty var(--float-dur, 9s) ease-in-out var(--float-delay, 0s)
+    infinite;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collage .card {
+    animation: none;
+  }
+}
+
+/* Fallback displacement before JS assigns random positions. */
+.collage__item:nth-child(4n + 2) {
+  --col: 8 / span 5;
+  --offset: 6rem;
+  --ratio: 3 / 4;
+}
+
+.collage__item:nth-child(4n + 3) {
+  --col: 4 / span 5;
+  --offset: -4rem;
+  --ratio: 1 / 1;
+}
+
+.collage__item:nth-child(4n + 4) {
+  --col: 9 / span 3;
+  --offset: -2rem;
+  --ratio: 2 / 3;
+}
+
+/* Captions on the home collage: tiny, and revealed only on hover. */
+.collage .card__meta {
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-soft);
+}
+
+.collage .card:hover .card__meta {
+  opacity: 1;
+}
+
+.collage .card__title {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+}
+
+.collage .card__sub {
+  font-size: 0.58rem;
+}
+
+@media (max-width: 720px) {
+  .collage {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .collage__item {
+    grid-column: 1 / -1 !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* ---------- Sections & grids ---------- */
+
+.section {
+  margin-top: 4.5rem;
+}
+
+.section__label {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+}
+
+/*
+ * Staggered project grid (à la Palomba Serafini): images of different
+ * sizes displaced left/right on a 12-column grid, repeating every 4 items.
+ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 5.5rem 2rem;
+  align-items: start;
+}
+
+.grid > :nth-child(4n + 1) {
+  grid-column: 1 / span 7;
+}
+
+.grid > :nth-child(4n + 2) {
+  grid-column: 9 / span 4;
+  margin-top: 7rem;
+}
+
+.grid > :nth-child(4n + 3) {
+  grid-column: 6 / span 6;
+  margin-top: -2rem;
+}
+
+.grid > :nth-child(4n + 4) {
+  grid-column: 1 / span 4;
+}
+
+/* Alternate image proportions with the displacement. */
+.grid > :nth-child(4n + 1) .card__media {
+  aspect-ratio: 3 / 2;
+}
+
+.grid > :nth-child(4n + 2) .card__media,
+.grid > :nth-child(4n + 4) .card__media {
+  aspect-ratio: 3 / 4;
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .grid > * {
+    grid-column: 1 / -1 !important;
+    margin-top: 0 !important;
+  }
+
+  .grid .card__media {
+    aspect-ratio: 4 / 3 !important;
+  }
+}
+
+.link-more {
+  display: inline-block;
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.2em;
+}
+
+/* ---------- Project cards ---------- */
+
+.card:hover {
+  opacity: 1;
+}
+
+.card__media {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--line);
+}
+
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-soft);
+}
+
+.card:hover .card__media img {
+  transform: scale(1.04);
+}
+
+.card__meta {
+  margin-top: 0.9rem;
+}
+
+.card__title {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.card__sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Subnav (categories) ---------- */
+
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.subnav a[aria-current='page'] {
+  color: var(--fg);
+  border-bottom: 1px solid currentColor;
+}
+
+/* ---------- Project page ---------- */
+
+/*
+ * Full-bleed hero: the cover image is a fixed background the content
+ * scrolls over, with the project title overlaid.
+ */
+.project__hero {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  min-height: 94svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--white);
+}
+
+/* Subtle dark veil for text readability. */
+.project__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.28);
+}
+
+/* With a white header, darken the top of the image a bit more. */
+.site--overlay-white .project__hero::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.45),
+    rgba(10, 10, 10, 0.2) 30%,
+    rgba(10, 10, 10, 0.28)
+  );
+}
+
+.project__hero-content {
+  position: relative;
+  text-align: center;
+  padding: 2rem;
+  animation: page-in 1.2s var(--ease-soft);
+}
+
+.project__hero-title {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project__hero .project__breadcrumb {
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 1.25rem;
+}
+
+/* background-attachment: fixed is unreliable on touch devices. */
+@media (max-width: 900px) {
+  .project__hero {
+    background-attachment: scroll;
+    min-height: 60svh;
+  }
+}
+
+.project__breadcrumb {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.project__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 3.5rem;
+  margin: 2rem 0 2.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.project__facts dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.project__facts dd {
+  font-size: 0.95rem;
+}
+
+.project__body {
+  max-width: 42rem;
+  margin-bottom: 3.5rem;
+}
+
+.project__body p + p {
+  margin-top: 1em;
+}
+
+/* Gallery — layout controlled by frontmatter (`layout:`). */
+
+.project__gallery {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.project__gallery img {
+  width: 100%;
+}
+
+.project--standard .project__gallery {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.project--wide .project__gallery {
+  /* full-bleed: escape the page padding */
+  margin-inline: calc(-1 * var(--space-page));
+  gap: 1rem;
+}
+
+.project--duo .project__gallery {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 720px) {
+  .project--duo .project__gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Press ----------
+ * Palomba Serafini-style index: full-width rows separated by thin rules,
+ * uppercase columns (year / outlet / title), arrow on hover.
+ */
+
+.press {
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.press__row {
+  display: grid;
+  grid-template-columns: 6rem 14rem 1fr auto;
+  align-items: baseline;
+  gap: 2rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: opacity 0.3s var(--ease-soft), padding-left 0.4s var(--ease-soft);
+}
+
+a.press__row:hover {
+  opacity: 1;
+  padding-left: 0.75rem;
+}
+
+.press__date {
+  color: var(--muted);
+}
+
+.press__outlet {
+  color: var(--muted);
+}
+
+.press__title {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+.press__arrow {
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .press__row {
+    grid-template-columns: 4rem 1fr auto;
+    gap: 1rem;
+  }
+
+  .press__outlet {
+    display: none;
+  }
+}
+
+/* ---------- Contact ---------- */
+
+.contact__lead {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  max-width: 30ch;
+  margin-bottom: 2.5rem;
+}
+
+.contact__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+}
