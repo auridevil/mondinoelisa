@@ -86,8 +86,12 @@ src/
 - [ ] Confirm Instagram handle URL.
 - [ ] About/bio copy for Elisa if a dedicated page is wanted.
 - [ ] Decide whether to license & self-host Satoshi vs. Fontshare CDN.
-- [x] Set up the GitHub Pages repo + Actions deploy → https://github.com/auridevil/mondinoelisa (public), Pages build_type=workflow, custom domain set to mondinoelisa.it.
-- [ ] **DNS**: mondinoelisa.it currently points to Squarespace (198.49.23.x / 198.185.159.x). To go live, point it to GitHub Pages: A records 185.199.108.153 / .109. / .110. / .111. (+ optional AAAA), then enable "Enforce HTTPS" in repo settings.
+- [x] Set up the GitHub Pages repo + Actions deploy → https://github.com/auridevil/mondinoelisa (public), Pages build_type=workflow.
+- [ ] **Go-live checklist** (site currently previews at https://auridevil.github.io/mondinoelisa/ — custom domain intentionally NOT active yet):
+  1. Point mondinoelisa.it DNS to GitHub Pages: A records 185.199.108.153 / 185.199.109.153 / 185.199.110.153 / 185.199.111.153 (today it points to Squarespace 198.49.23.x).
+  2. Delete the `BASE_PATH: /mondinoelisa/` env line in `.github/workflows/deploy.yml`.
+  3. Re-add the custom domain: `gh api -X PUT repos/auridevil/mondinoelisa/pages -f cname=mondinoelisa.it`.
+  4. Enable "Enforce HTTPS" in repo Pages settings once the certificate is issued.
 
 ## Decisions log
 - 2026-07-02: Chose `vite-react-ssg` over Next.js/Astro to keep it lightweight React with true compile-time HTML and minimal config.

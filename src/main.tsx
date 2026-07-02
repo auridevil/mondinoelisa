@@ -7,5 +7,9 @@ import './styles/layout.css'
 import './styles/pages.css'
 
 // vite-react-ssg prerenders every route to static HTML at build time,
-// then hydrates it in the browser.
-export const createRoot = ViteReactSSG({ routes })
+// then hydrates it in the browser. basename follows Vite's `base` so the
+// site also works when served from a sub-path (github.io preview).
+export const createRoot = ViteReactSSG({
+  routes,
+  basename: import.meta.env.BASE_URL,
+})
