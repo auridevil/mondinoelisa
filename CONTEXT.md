@@ -93,6 +93,15 @@ src/
   3. Re-add the custom domain: `gh api -X PUT repos/auridevil/mondinoelisa/pages -f cname=mondinoelisa.it`.
   4. Enable "Enforce HTTPS" in repo Pages settings once the certificate is issued.
 
+## Branch: concept-radical
+Cutting-edge take built on top of the Atelier concept (user: "more free, more daring"):
+- **Kinetic type intro** on home: three marquee lines (name / role / categories) scrolling against each other, full viewport.
+- **Project deck**: full-screen sticky panels sliding over one another on scroll; images grayscale→color on hover; huge serif titles + rotated numbers inverting over the photos via `mix-blend-mode: difference`.
+- **Custom cursor**: white difference-blend dot replacing the native cursor (hover devices only), grows over links.
+- **Film grain** animated over the whole site (`body::after`, SVG turbulence).
+- **Outline type** on the works index (hollow serif, fills on hover) + giant serif contact lines + closing marquee link.
+- Home is black again on this branch; index stays paper.
+
 ## Decisions log
 - 2026-07-02: Chose `vite-react-ssg` over Next.js/Astro to keep it lightweight React with true compile-time HTML and minimal config.
 - 2026-07-02: CSS + IntersectionObserver for animations instead of framer-motion, to stay lightweight and avoid hydration flashes.

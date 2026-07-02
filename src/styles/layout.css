@@ -151,6 +151,42 @@
   transform: none;
 }
 
+/* ---------- Custom cursor ---------- */
+
+.cursor {
+  position: fixed;
+  left: -100px;
+  top: -100px;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 999;
+  transition: width 0.35s var(--ease-soft), height 0.35s var(--ease-soft),
+    margin 0.35s var(--ease-soft);
+}
+
+.cursor--big {
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+}
+
+@media (hover: none) {
+  .cursor {
+    display: none;
+  }
+}
+
+/* Full-bleed helper: escape the page container horizontally. */
+.full-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
 /* ---------- Footer ---------- */
 
 .footer {

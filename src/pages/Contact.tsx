@@ -21,15 +21,15 @@ export default function Contact() {
         </Reveal>
         <Reveal delay={160}>
           <ul className="contact__list">
-            <li>
+            <li className="contact__big">
               <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
             </li>
-            <li>
+            <li className="contact__big">
               <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
             </li>
-            <li>
+            <li className="contact__big">
               <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
-                Instagram
+                Instagram ↗
               </a>
             </li>
             <li>{CONTACT.address}</li>

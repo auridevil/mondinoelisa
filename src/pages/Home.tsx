@@ -1,16 +1,40 @@
+import { type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { Head } from 'vite-react-ssg'
-import { Reveal } from '../components/Reveal'
-import { categories } from '../content/categories'
 import { projects } from '../lib/content'
+import { categories } from '../content/categories'
+
+/** Endless horizontal ticker; content is duplicated for a seamless loop. */
+function Marquee({
+  children,
+  reverse = false,
+  className = '',
+}: {
+  children: ReactNode
+  reverse?: boolean
+  className?: string
+}) {
+  return (
+    <div className={`marquee ${className}`}>
+      <div
+        className={`marquee__track${reverse ? ' marquee__track--reverse' : ''}`}
+      >
+        <span>{children}</span>
+        <span aria-hidden="true">{children}</span>
+      </div>
+    </div>
+  )
+}
 
 /**
- * "Atelier" concept — a calm editorial home:
- * an opening statement in serif, then the projects as numbered
- * magazine rows, image and words alternating sides.
+ * "Radical" concept home:
+ * a full-screen kinetic type intro (three marquee lines moving against
+ * each other), then the projects as a deck of full-viewport panels that
+ * slide over one another while scrolling, titles inverting over the
+ * photography via mix-blend-mode.
  */
 export default function Home() {
-  const rows = projects.slice(0, 6)
+  const deck = projects.slice(0, 5)
 
   return (
     <>
@@ -18,54 +42,41 @@ export default function Home() {
         <title>Elisa Mondino — Interior Designer</title>
       </Head>
 
-      <section className="statement">
-        <Reveal>
-          <p className="statement__label">
-            Elisa Mondino — Interior Designer, Fossano
-          </p>
-        </Reveal>
-        <Reveal delay={150}>
-          <h1 className="statement__text">
-            Interni essenziali,
-            <br />
-            <em>disegnati con misura.</em>
-          </h1>
-        </Reveal>
+      <section className="kinetic full-bleed" aria-label="Elisa Mondino, interior designer">
+        <Marquee className="kinetic__line kinetic__line--name">
+          Elisa Mondino — Elisa Mondino —&nbsp;
+        </Marquee>
+        <Marquee reverse className="kinetic__line kinetic__line--role">
+          interior designer · fossano, italia ·&nbsp;
+        </Marquee>
+        <Marquee className="kinetic__line kinetic__line--cats">
+          {categories
+            .filter((c) => !c.hidden)
+            .map((c) => c.label)
+            .join(' / ')}{' '}
+          /&nbsp;
+        </Marquee>
       </section>
 
-      <section className="editorial" aria-label="Progetti selezionati">
-        {rows.map((p, i) => {
-          const category = categories.find((c) => c.slug === p.category)
-          return (
-            <Reveal key={p.slug}>
-              <Link
-                to={`/lavori/${p.category}/${p.slug}`}
-                className="edit-row"
-              >
-                <span className="edit-row__num">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div className="edit-row__media">
-                  <img src={p.cover} alt={p.title} loading="lazy" />
-                </div>
-                <div className="edit-row__text">
-                  <p className="edit-row__kicker">
-                    {category?.label} — {p.location}, {p.year}
-                  </p>
-                  <h2 className="edit-row__title">{p.title}</h2>
-                  <p className="edit-row__excerpt">{p.excerpt}</p>
-                </div>
-              </Link>
-            </Reveal>
-          )
-        })}
+      <section className="deck full-bleed" aria-label="Progetti">
+        {deck.map((p, i) => (
+          <Link
+            key={p.slug}
+            to={`/lavori/${p.category}/${p.slug}`}
+            className="deck__panel"
+          >
+            <img src={p.cover} alt={p.title} loading={i === 0 ? 'eager' : 'lazy'} />
+            <span className="deck__num">
+              {String(i + 1).padStart(2, '0')} / {p.location}
+            </span>
+            <h2 className="deck__title">{p.title}</h2>
+          </Link>
+        ))}
       </section>
 
-      <Reveal>
-        <Link to="/lavori" className="link-more">
-          Indice completo dei progetti →
-        </Link>
-      </Reveal>
+      <Link to="/lavori" className="marquee-link full-bleed">
+        <Marquee>Tutti i progetti — Tutti i progetti —&nbsp;</Marquee>
+      </Link>
     </>
   )
 }

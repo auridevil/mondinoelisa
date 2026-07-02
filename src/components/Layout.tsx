@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Nav } from './Nav'
 import { Footer } from './Footer'
+import { Cursor } from './Cursor'
 import { projects } from '../lib/content'
 
 /**
@@ -9,7 +10,7 @@ import { projects } from '../lib/content'
  * The theme is decided per-route here and applied to the whole
  * viewport — header and footer included — with a soft transition.
  */
-const DARK_ROUTES = ['/contatti']
+const DARK_ROUTES = ['/', '/contatti']
 
 function themeFor(pathname: string): 'light' | 'dark' {
   return DARK_ROUTES.includes(pathname.replace(/\/$/, '') || '/') ? 'dark' : 'light'
@@ -36,6 +37,7 @@ export default function Layout() {
 
   return (
     <div className={classes.join(' ')}>
+      <Cursor />
       <Nav />
       {/* key on pathname re-triggers the fade-in on every navigation */}
       <main className="page" key={pathname}>

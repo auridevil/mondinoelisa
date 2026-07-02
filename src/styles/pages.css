@@ -1,125 +1,139 @@
 /* Page-specific styles: home, work listings, project, press, contact. */
 
-/* ---------- Home: opening statement ---------- */
+/* ---------- Home: kinetic type intro ---------- */
 
-.statement {
-  min-height: 55vh;
+.kinetic {
+  min-height: calc(100svh - 12rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
+  overflow: hidden;
 }
 
-.statement__label {
-  font-size: 0.72rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--muted);
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.statement__text {
-  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+.marquee__track {
+  display: inline-flex;
+  width: max-content;
+  animation: marquee var(--marquee-dur, 22s) linear infinite;
+}
+
+.marquee__track--reverse {
+  animation-direction: reverse;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.kinetic__line--name {
+  font-family: var(--font-serif);
   font-weight: 300;
-  max-width: 18ch;
+  font-size: clamp(4rem, 13vw, 12rem);
+  line-height: 1;
+  --marquee-dur: 26s;
 }
 
-.statement__text em {
-  font-style: italic;
-  font-weight: 300;
-}
-
-/* ---------- Home: editorial project rows ---------- */
-
-.editorial {
-  display: flex;
-  flex-direction: column;
-  gap: 8rem;
-  padding: 4rem 0 2rem;
-}
-
-.edit-row {
-  display: grid;
-  grid-template-columns: 4rem 1fr 1fr;
-  gap: 2rem 3.5rem;
-  align-items: center;
-}
-
-.edit-row:hover {
-  opacity: 1;
-}
-
-/* Alternate: image and text swap sides on even rows. */
-.editorial > :nth-child(even) .edit-row__media {
-  order: 3;
-}
-
-.edit-row__num {
+.kinetic__line--role {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: clamp(1.6rem, 4.5vw, 3.6rem);
   color: var(--muted);
-  align-self: start;
-  padding-top: 0.5rem;
+  --marquee-dur: 34s;
 }
 
-.edit-row__media {
+.kinetic__line--cats {
+  font-size: clamp(0.8rem, 1.6vw, 1.1rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  --marquee-dur: 40s;
+}
+
+/* ---------- Home: full-screen project deck ----------
+ * Every panel is sticky at the top of the viewport, so while scrolling
+ * each project slides over the previous one like a deck of cards.
+ */
+
+.deck__panel {
+  position: sticky;
+  top: 0;
+  display: block;
+  height: 100svh;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
 }
 
-.edit-row__media img {
+.deck__panel img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.4s var(--ease-soft);
+  filter: grayscale(1);
+  transition: filter 0.9s var(--ease-soft), transform 6s var(--ease-soft);
 }
 
-.edit-row:hover .edit-row__media img {
-  transform: scale(1.05);
+.deck__panel:hover img {
+  filter: grayscale(0);
+  transform: scale(1.04);
 }
 
-.edit-row__kicker {
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.edit-row__title {
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
+/* Huge titles inverting over the photography. */
+.deck__title {
+  position: absolute;
+  bottom: 4rem;
+  left: var(--space-page);
+  max-width: 90vw;
+  font-size: clamp(3rem, 10vw, 9rem);
   font-weight: 300;
-  margin-bottom: 1rem;
-  transition: font-style 0.2s;
+  line-height: 0.95;
+  color: #fff;
+  mix-blend-mode: difference;
 }
 
-.edit-row:hover .edit-row__title {
+.deck__panel:nth-child(even) .deck__title {
+  left: auto;
+  right: var(--space-page);
+  bottom: auto;
+  top: 5.5rem;
+  text-align: right;
   font-style: italic;
 }
 
-.edit-row__excerpt {
-  font-size: 0.95rem;
-  color: var(--muted);
-  max-width: 38ch;
+.deck__num {
+  position: absolute;
+  top: 50%;
+  right: 1.25rem;
+  transform: rotate(90deg) translateX(-50%);
+  transform-origin: right center;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #fff;
+  mix-blend-mode: difference;
 }
 
-@media (max-width: 820px) {
-  .edit-row {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
+/* ---------- Home: closing marquee link ---------- */
 
-  .editorial {
-    gap: 5rem;
-  }
+.marquee-link {
+  display: block;
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  --marquee-dur: 18s;
+}
 
-  .edit-row__num {
-    padding: 0;
-  }
-
-  .editorial > :nth-child(even) .edit-row__media {
-    order: 0;
-  }
+.marquee-link:hover {
+  opacity: 1;
+  font-style: italic;
 }
 
 /* ---------- Work: typographic index ---------- */
@@ -150,13 +164,18 @@
 
 .index__title {
   font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  font-size: clamp(2.2rem, 6vw, 5rem);
   font-weight: 300;
-  line-height: 1.05;
-  transition: transform 0.5s var(--ease-soft), font-style 0.2s;
+  line-height: 1.02;
+  /* Outline type: hollow until hovered. */
+  color: transparent;
+  -webkit-text-stroke: 1px var(--fg);
+  transition: transform 0.5s var(--ease-soft), color 0.4s var(--ease-soft),
+    font-style 0.2s;
 }
 
 .index__row:hover .index__title {
+  color: var(--fg);
   font-style: italic;
   transform: translateX(0.75rem);
 }
@@ -552,4 +571,16 @@ a.press__row:hover {
   gap: 0.9rem;
   font-size: clamp(1rem, 2vw, 1.25rem);
   font-weight: 300;
+}
+
+/* Email / phone / instagram as huge serif lines. */
+.contact__big {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 6vw, 4.4rem);
+  line-height: 1.15;
+}
+
+.contact__big a:hover {
+  font-style: italic;
+  opacity: 1;
 }
