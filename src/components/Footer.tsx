@@ -1,0 +1,17 @@
+import { CONTACT, INSTAGRAM_URL } from '../lib/site'
+
+export function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer__row">
+        <span>{CONTACT.address}</span>
+        <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+        <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+        <span>{CONTACT.vat}</span>
+        <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
+          Instagram
+        </a>
+      </div>
+    </footer>
+  )
+}
