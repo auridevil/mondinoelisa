@@ -1,0 +1,60 @@
+/* Logo "E—M" — see Logo.tsx for the concept. */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand:hover {
+  opacity: 1;
+}
+
+/* The stamp: initials joined by an em dash, inside a hairline box. */
+.brand__mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.16em;
+  padding: 0.32em 0.5em;
+  border: 1px solid currentColor;
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: 1.35rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.brand__dash {
+  width: 0.55em;
+  height: 0.085em;
+  background: currentColor;
+  transition: width 0.5s var(--ease-soft);
+}
+
+/* The measuring line extends on hover. */
+.brand:hover .brand__dash {
+  width: 1.15em;
+}
+
+.brand__id {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.brand__name {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.brand__role {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
