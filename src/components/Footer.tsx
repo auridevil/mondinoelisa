@@ -1,4 +1,5 @@
 import { CONTACT, INSTAGRAM_URL } from '../lib/site'
+import { Signature } from './Signature'
 
 export function Footer() {
   return (
@@ -11,6 +12,7 @@ export function Footer() {
         <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
           Instagram
         </a>
+        <Signature className="sig--footer" />
       </div>
     </footer>
   )
