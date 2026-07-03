@@ -7,4 +7,14 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: process.env.BASE_PATH || '/',
   plugins: [react()],
+  // Open dev/preview to LAN + tunnels (ngrok, cloudflared, ...):
+  // listen on all interfaces and accept any Host header.
+  server: {
+    host: true,
+    allowedHosts: true,
+  },
+  preview: {
+    host: true,
+    allowedHosts: true,
+  },
 })
