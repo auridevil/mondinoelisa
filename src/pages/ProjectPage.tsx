@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Head } from 'vite-react-ssg'
 import { Reveal } from '../components/Reveal'
+import { Signature } from '../components/Signature'
 import { categories } from '../content/categories'
 import type { Project } from '../lib/content'
 
@@ -34,6 +35,8 @@ export default function ProjectPage({ project }: { project: Project }) {
             </p>
             <h1 className="project__hero-title">{project.title}</h1>
           </div>
+          {/* Signed like a canvas. */}
+          <Signature className="sig--hero" />
         </section>
 
         <Reveal delay={100}>

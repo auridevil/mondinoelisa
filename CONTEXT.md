@@ -84,6 +84,8 @@ src/
 - [ ] Real project copy/metadata (invented for the draft).
 - [ ] Real press articles + links.
 - [x] Instagram: https://www.instagram.com/elisamondino_interiordesign/ (confirmed by user).
+- [x] Logo: **E—M** in Satoshi Black — initials as the typographic *em* (unit of measure), dash stretches on hover (`Logo.tsx` + `logo.css`).
+- [x] Signature/watermark "**EM INTERIOR DESIGN**" (Elisa signs canvases with it): `Signature.tsx` — stamped bottom-right on project heroes (difference blend) and in the footer. Standalone assets for canvas/photo use in `brand/` (SVG + transparent PNG, white & black, PNGs rendered with real Satoshi glyphs).
 - [ ] About/bio copy for Elisa if a dedicated page is wanted.
 - [ ] Decide whether to license & self-host Satoshi vs. Fontshare CDN.
 - [x] Set up the GitHub Pages repo + Actions deploy → https://github.com/auridevil/mondinoelisa (public), Pages build_type=workflow.

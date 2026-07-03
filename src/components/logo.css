@@ -58,3 +58,58 @@
   text-transform: uppercase;
   color: var(--muted);
 }
+
+/* ---------- Signature "EM INTERIOR DESIGN" (watermark variant) ---------- */
+
+.sig {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--font-sans);
+}
+
+.sig__mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.16em;
+  padding: 0.3em 0.48em;
+  border: 1.5px solid currentColor;
+  font-weight: 900;
+  font-size: 1.15em;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.sig__dash {
+  width: 0.55em;
+  height: 0.09em;
+  background: currentColor;
+}
+
+.sig__text {
+  font-weight: 500;
+  font-size: 0.42em;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em; /* balances the trailing letter-spacing */
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Signature on project heroes: signed bottom-right, like a canvas. */
+.sig--hero {
+  position: absolute;
+  right: var(--space-page);
+  bottom: 2.2rem;
+  font-size: 1.6rem;
+  color: #fff;
+  mix-blend-mode: difference;
+  opacity: 0.85;
+}
+
+/* Signature in the footer, pushed to the right edge. */
+.sig--footer {
+  font-size: 1.3rem;
+  color: var(--muted);
+  margin-left: auto;
+}
