@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 210">
+  <!-- EM INTERIOR DESIGN — watermark (black, for light backgrounds).
+       Note: renders with Satoshi where the font is available (e.g. browsers
+       with the font loaded); for print/canvas use the PNG versions. -->
+  <style>
+    text { font-family: 'Satoshi', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #0a0a0a; }
+    .i { font-weight: 900; font-size: 56px; letter-spacing: -1px; }
+    .t { font-weight: 500; font-size: 19px; letter-spacing: 9px; }
+  </style>
+  <rect x="102" y="16" width="156" height="90" fill="none" stroke="#0a0a0a" stroke-width="3"/>
+  <text class="i" x="160" y="81" text-anchor="end">E</text>
+  <rect x="168" y="58" width="25" height="5.5" fill="#0a0a0a"/>
+  <text class="i" x="201" y="81" text-anchor="start">M</text>
+  <text class="t" x="184" y="162" text-anchor="middle">INTERIOR DESIGN</text>
+</svg>
