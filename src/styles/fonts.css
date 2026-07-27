@@ -1,0 +1,19 @@
+/* Satoshi — self-hosted (licensed OTF/WEB kit, Fontshare Font License).
+   Variable files cover the full 300–900 weight range in two requests.
+   License: /fonts/satoshi/LICENSE.txt */
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-VariableItalic.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}

@@ -34,6 +34,7 @@ export function Nav() {
       <Logo />
       <nav className="nav__links" aria-label="Navigazione principale">
         <NavLink to="/lavori">Lavori</NavLink>
+        <NavLink to="/studio">Studio</NavLink>
         <NavLink to="/stampa">Stampa</NavLink>
         <NavLink to="/contatti">Contatti</NavLink>
         <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">

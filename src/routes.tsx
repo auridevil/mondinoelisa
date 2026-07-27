@@ -1,6 +1,7 @@
 import type { RouteRecord } from 'vite-react-ssg'
 import Layout from './components/Layout'
 import Home from './pages/Home'
+import About from './pages/About'
 import Work from './pages/Work'
 import CategoryPage from './pages/CategoryPage'
 import ProjectPage from './pages/ProjectPage'
@@ -21,6 +22,7 @@ export const routes: RouteRecord[] = [
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
+      { path: 'studio', element: <About /> },
       { path: 'lavori', element: <Work /> },
       ...visibleCategories.map((c) => ({
         path: `lavori/${c.slug}`,

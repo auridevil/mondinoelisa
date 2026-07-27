@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { Signature } from '../components/Signature'
 import { categories } from '../content/categories'
 import type { Project } from '../lib/content'
+import { asset } from '../lib/asset'
 
 /**
  * Single project page. The `layout` field from the Markdown frontmatter
@@ -25,7 +26,7 @@ export default function ProjectPage({ project }: { project: Project }) {
         {/* Cover as full-bleed fixed background, title overlaid (PS-style). */}
         <section
           className="project__hero"
-          style={{ backgroundImage: `url(${project.cover})` }}
+          style={{ backgroundImage: `url(${asset(project.cover)})` }}
         >
           <div className="project__hero-content">
             <p className="project__breadcrumb">
@@ -71,10 +72,25 @@ export default function ProjectPage({ project }: { project: Project }) {
           />
         </Reveal>
 
+        {project.video && (
+          <Reveal delay={120}>
+            <div className="project__video">
+              <video
+                src={asset(project.video)}
+                autoPlay
+                muted
+                loop
+                playsInline
+                aria-label={`${project.title} — video`}
+              />
+            </div>
+          </Reveal>
+        )}
+
         <div className="project__gallery">
           {project.gallery.map((src, i) => (
             <Reveal key={src} delay={(i % 2) * 80}>
-              <img src={src} alt={`${project.title} — immagine ${i + 1}`} loading="lazy" />
+              <img src={asset(src)} alt={`${project.title} — immagine ${i + 1}`} loading="lazy" />
             </Reveal>
           ))}
         </div>

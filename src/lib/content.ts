@@ -22,6 +22,8 @@ export interface Project {
   client?: string
   cover: string
   gallery: string[]
+  /** Optional short looping clip shown on the project page. */
+  video?: string
   layout: ProjectLayout
   /** Color of the logo/menu overlaid on the hero image. */
   header: 'white' | 'black'
