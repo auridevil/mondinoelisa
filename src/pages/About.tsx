@@ -4,7 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { asset } from '../lib/asset'
 
 /**
- * "Studio" — profilo di Elisa Mondino. Testo e ritratto ricavati dal
+ * "About" — profilo di Elisa Mondino. Testo e ritratto ricavati dal
  * servizio di Wine & Luxury ("La firma di Elisa Mondino nel mondo degli
  * interni", a cura di Viviana Pignelli).
  */
@@ -12,11 +12,11 @@ export default function About() {
   return (
     <>
       <Head>
-        <title>Studio — Elisa Mondino</title>
+        <title>About — Elisa Mondino</title>
       </Head>
 
       <Reveal>
-        <h1 className="page__title">Studio</h1>
+        <h1 className="page__title">About</h1>
       </Reveal>
 
       <div className="about">
@@ -91,7 +91,7 @@ export default function About() {
             <p className="about__press">
               Il suo lavoro è stato raccontato da <em>Wine&nbsp;&amp;&nbsp;Luxury</em>{' '}
               nel servizio «La firma di Elisa Mondino nel mondo degli interni».{' '}
-              <Link to="/stampa">Stampa →</Link>
+              <Link to="/press">Press →</Link>
             </p>
           </Reveal>
         </div>

@@ -1,7 +1,7 @@
 # Elisa Mondino — Portfolio Website · Project Context
 
 > Living document. Keep this updated as the project evolves.
-> Last updated: 2026-07-02
+> Last updated: 2026-09-01
 
 ## Overview
 Portfolio website for **Elisa Mondino**, interior designer.
@@ -12,8 +12,8 @@ Portfolio website for **Elisa Mondino**, interior designer.
 ## Design direction
 - **Inspiration:** [palombaserafini.com/en/ps-a](https://www.palombaserafini.com/en/ps-a) (primary) + [normcph.com](https://normcph.com/)
 - **Palette:** strict black & white. Like Palomba Serafini, some pages are white-on-black and some black-on-white. Theme is set per-page (`theme: 'light' | 'dark'`) and transitions softly.
-- **Typography:** Satoshi (loaded from Fontshare CDN).
-- **Logo:** no real logo yet → text wordmark "ELISA MONDINO" set in Satoshi (see `src/components/Logo.tsx`). Favicon is an SVG "EM" monogram.
+- **Typography:** Satoshi — self-hosted variable woff2, `public/fonts/satoshi/` (see `src/styles/fonts.css`).
+- **Logo:** Elisa's real E/M ligature monogram, traced from her brand board as vector strokes in `src/components/Monogram.tsx` (an E whose shortened middle arm hands off to the M; the M's peak is a flat cut, not a mitred point). Used in the nav lockup (`Logo.tsx`), as the hero/footer signature (`Signature.tsx`) and as the favicon (`public/favicon.svg`). Drawn on `currentColor`, so it inverts for free on dark pages.
 - **Motion:** soft/subtle — fade + rise reveal on scroll, gentle hover states. Implemented with CSS transitions + a small IntersectionObserver hook (`useReveal`), no heavy animation library.
 
 ## Site structure / navigation
@@ -38,7 +38,7 @@ Portfolio website for **Elisa Mondino**, interior designer.
 - **Content:** one Markdown file per project under `src/content/projects/<category>/`, with YAML frontmatter (metadata + layout config) and a Markdown body. Parsed at build time via `import.meta.glob(..., { eager: true, query: '?raw' })` + `front-matter` + `marked`.
 - **Styling:** plain CSS with custom properties (design tokens) in `src/styles/`. No CSS framework.
 - **Deploy:** GitHub Actions (`.github/workflows/deploy.yml`) → GitHub Pages. `public/CNAME` holds the custom domain; `base` is `/`. `public/404.html` is a static fallback page.
-- **Routing note:** every category and project MD becomes a concrete route in `src/routes.tsx`, so all 18 pages are prerendered — GitHub Pages serves `/lavori/x` from `lavori/x.html` natively (no SPA hacks needed).
+- **Routing note:** every category and project MD becomes a concrete route in `src/routes.tsx`, so every page is prerendered — GitHub Pages serves `/work/x` from `work/x.html` natively (no SPA hacks needed).
 
 ### Content model (project frontmatter)
 ```yaml
@@ -99,8 +99,9 @@ src/
 - 2026-07-02: Chose `vite-react-ssg` over Next.js/Astro to keep it lightweight React with true compile-time HTML and minimal config.
 - 2026-07-02: CSS + IntersectionObserver for animations instead of framer-motion, to stay lightweight and avoid hydration flashes.
 - 2026-07-02: "Commercial" category defined but hidden via flag (empty for now).
-- 2026-07-02: Categories use Italian slugs: `residenziale`, `commerciale`, `workspace`, `hospitality`, `in-corso`. Routes: `/lavori`, `/stampa`, `/contatti`.
-- 2026-07-02: Dark pages = **contatti only**; home and everything else light (edit `DARK_ROUTES` in `src/components/Layout.tsx`). User feedback: main view must be white.
+- 2026-07-02: Categories use Italian slugs: `residenziale`, `commerciale`, `workspace`, `hospitality`, `in-corso`.
+- 2026-09-01: **Top-level routes and nav labels are English** (Elisa: "le scritte in alto le mettiamo tutte in inglese"): `/work`, `/about`, `/press`, `/contact` — and `/work/<categoria>/<progetto>`. Category slugs and all body copy stay Italian. The About page was called "Studio" until she asked for "About".
+- 2026-07-02: Dark pages = **/contact only**; home and everything else light (edit `DARK_ROUTES` in `src/components/Layout.tsx`). User feedback: main view must be white.
 - 2026-07-02: Pictures are in **full color** (user feedback; grayscale removed). The B&W constraint applies to the UI itself, not the photography.
 - 2026-07-02: Project listings use a **staggered/displaced grid** à la Palomba Serafini: 12-col grid, 4-item repeating pattern of alternating widths, offsets and aspect ratios (`.grid` in `src/styles/pages.css`). Collapses to one column on mobile.
 - 2026-07-02: Press is a **PS-style index list**: full-width rows with thin rules, uppercase columns (year / outlet / title / ↗), row shifts right on hover.
@@ -121,3 +122,18 @@ src/
 - 2026-07-27: **Satoshi self-hosted** (`public/fonts/satoshi/`, variable woff2 300–900 + italic, FFL license), `src/styles/fonts.css`; Fontshare CDN `<link>` removed from `index.html`. Resolves the "license & self-host Satoshi" TODO and gives a real Black (900) weight (Fontshare only served ≤700, so the logo's 900 was faux-bold).
 - 2026-07-27: **Real projects (first 7 of 16):** residenziale — Casa Deva (Roreto di Cherasco 2022), Attico sotto le travi (Savigliano 2024), Appartamento a Fossano (2024), Casa botanica (TODO), Appartamento essenziale (TODO); workspace — Ufficio del Turismo Alba (2024, TODO), ACA · Sale riunioni (TODO). Copy for the first three is the client's real `.docx` text; the rest is drafted and flagged `# TODO` in frontmatter for Elisa to confirm. `hospitality` + `in-corso` categories hidden until they have real content.
 - 2026-07-27: **The `PROJECTS/` renders (9)** await a per-project category decision (built→residenziale/workspace vs not-yet-built→in-corso). Photographer for the shot homes: **Federica Borgato** (www.federicaborgato.com). Press source: a real 6-page *Wine & Luxury* feature (pp.880–885) — to be used for the Press index + an optional About/bio.
+- 2026-09-01: **Gallery rows come from image orientation, not frontmatter.** `npm run image-sizes`
+  (`scripts/gen-image-sizes.mjs`) writes `src/content/image-sizes.json` — every photo's pixel size —
+  and `build` runs it first. `galleryRows()` in `src/lib/content.ts` then pairs consecutive portrait
+  photos two-up, while landscape photos keep the full width; a lone portrait is capped to the
+  viewport height and centred. Elisa's note: "le foto orizzontali si vedono bene ma quelle verticali
+  no — mettiamone due vicine di foto verticali così si vedono". **Re-run `npm run image-sizes` after
+  adding or replacing photos.** (141 of the current 227 photos are portrait, so this is most of them.)
+- 2026-09-01: **The home collage draws photos, not projects.** `home: false` in a project's
+  frontmatter keeps it out of the collage — set on both workspace projects, because Elisa kept
+  landing on the home page and seeing workspace ("ogni volta che la apro c'è sempre work space,
+  non devono esserci"). They are still reachable under Work. The collage now takes cover + gallery
+  shots round-robin so a short project list still fills the page, and each tile keeps its real
+  aspect ratio instead of being cropped to a random one.
+- 2026-09-01: `src/content/_drafts/` is outside the content glob — markdown parked there has no
+  route and no listing. `casa-va.md` (H_VA) lives there until the client sends proper photos.

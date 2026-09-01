@@ -1,8 +1,8 @@
 ---
 # TODO: confermare titolo, luogo e anno (foto fornite dal cliente, senza scheda)
-title: Appartamento essenziale
+title: "Appartamento essenziale"
 category: residenziale
-location: Piemonte
+location: "Piemonte"
 year: 2024
 cover: /projects/casa-va/02.jpg
 gallery:
@@ -14,7 +14,7 @@ gallery:
   - /projects/casa-va/09.jpg
 layout: standard
 header: white
-excerpt: Linee pulite, luce nascosta e una parete a listelli di legno che scandisce lo spazio.
+excerpt: "Linee pulite, luce nascosta e una parete a listelli di legno che scandisce lo spazio."
 order: 5
 ---
 

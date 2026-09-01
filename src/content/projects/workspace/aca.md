@@ -1,9 +1,9 @@
 ---
-# TODO: confermare denominazione, luogo e anno
-title: ACA · Sale riunioni
+title: "Sale riunioni ACA Alba"
+subtitle: "Arredi su misura per Saglietti Group"
 category: workspace
-location: Piemonte
-year: 2024
+location: "Alba, CN"
+year: 2025
 cover: /projects/aca/02.jpg
 gallery:
   - /projects/aca/06.jpg
@@ -13,12 +13,15 @@ gallery:
   - /projects/aca/04.jpg
 layout: wide
 header: black
-excerpt: Sale riunioni per uno spazio aziendale, tra pareti effetto marmo, controsoffitti in legno e sedute su misura.
+photos: Saglietti Group
+# Fuori dal collage della home (Elisa: niente workspace in apertura).
+home: false
+excerpt: "Le due nuove sale riunioni dell'Associazione Commercianti Albesi: ambienti di rappresentanza eleganti ma misurati, pensati per durare."
 order: 2
 ---
 
-<!-- TODO: testo di sintesi da confermare con Elisa. -->
+Per conto di Saglietti Group abbiamo lavorato alla realizzazione delle due nuove sale riunioni dell'Associazione Commercianti Albesi, al quinto piano della sede istituzionale nel centro di Alba: ambienti di rappresentanza eleganti ma misurati, pensati per durare nel tempo sia esteticamente sia tecnologicamente.
 
-Un progetto di spazi aziendali dedicato alle sale riunioni, dove funzionalità e rappresentanza convivono in un linguaggio sobrio e riconoscibile. Le pareti attrezzate effetto marmo fanno da sfondo ai tavoli conferenza, mentre i controsoffitti in legno con disegno geometrico assorbono la luce e definiscono il carattere degli ambienti.
+Nella sala principale il tavolo su misura da 4,80 × 2,40 metri accoglie fino a venti persone, con base in legno laccato antracite, struttura portante in ferro e piano in rovere verniciato. La complessità è tutta all'interno: impianti elettrici e audiovisivi completamente occultati, con sei top-access in legno — scelta più raffinata dello standard metallico — predisposti per prese, USB e cablaggi audio-video. Il tavolo dialoga con una boiserie alta 2,70 metri che ospita un monitor da 100 pollici e nasconde PC, cablaggi e sistemi di gestione, con pannelli inferiori interamente ispezionabili per manutenzioni e aggiornamenti futuri. La seconda sala, più raccolta, riprende le stesse logiche costruttive su un tavolo rotondo da 140 cm, completato da un mobile contenitore su misura.
 
-Le sedute, selezionate per comfort e continuità cromatica, e un'illuminazione calibrata rendono ogni sala uno spazio in cui la produttività non rinuncia allo stile.
+**Il valore della collaborazione.** Un progetto di questo tipo — arredi su misura, impianti integrati e cantiere in un edificio storico pienamente operativo — funziona solo se ogni figura coinvolta lavora in coordinamento. La collaborazione con Saglietti Group, che ha curato la realizzazione degli arredi, ha permesso di far coincidere precisione costruttiva e pulizia formale: rendere visibile il valore e invisibile la tecnica. Un rapporto di fiducia che continua a dare risultati concreti, progetto dopo progetto.

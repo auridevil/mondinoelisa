@@ -33,10 +33,10 @@ export function Nav() {
     <header className="nav" ref={ref}>
       <Logo />
       <nav className="nav__links" aria-label="Navigazione principale">
-        <NavLink to="/lavori">Lavori</NavLink>
-        <NavLink to="/studio">Studio</NavLink>
-        <NavLink to="/stampa">Stampa</NavLink>
-        <NavLink to="/contatti">Contatti</NavLink>
+        <NavLink to="/work">Work</NavLink>
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/press">Press</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
         <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
           Instagram
         </a>

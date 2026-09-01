@@ -1,9 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- E—M: initials joined by an em dash (the typographic measure) -->
+  <!-- Elisa Mondino — E/M monogram (see src/components/Monogram.tsx) -->
   <rect width="64" height="64" fill="#0a0a0a"/>
-  <g fill="#ffffff" font-family="Satoshi, Helvetica, Arial, sans-serif" font-weight="900" font-size="26">
-    <text x="8" y="42">E</text>
-    <rect x="26" y="31" width="12" height="3.2"/>
-    <text x="41" y="42">M</text>
+  <!-- mark is 240x224; scaled to 42x39 and centred, with a slightly heavier
+       stroke than the logo so it still reads at 16px -->
+  <g transform="translate(11 12.5) scale(0.175)" fill="none" stroke="#ffffff"
+     stroke-width="15" stroke-linejoin="miter">
+    <path d="M95.5 5.5 H5.5 V148.5 H97.5"/>
+    <path d="M5.5 73.5 H78.5"/>
+    <path d="M93.5 88 L167.5 178 L232 92"/>
+    <path d="M234.5 88 V218"/>
   </g>
 </svg>

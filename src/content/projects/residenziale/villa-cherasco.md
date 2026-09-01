@@ -1,7 +1,7 @@
 ---
-title: Casa Deva
+title: "Villa di nuova costruzione"
 category: residenziale
-location: Roreto di Cherasco, CN
+location: "Roreto di Cherasco, CN"
 year: 2022
 cover: /projects/villa-cherasco/24.jpg
 gallery:
@@ -19,7 +19,9 @@ gallery:
   - /projects/villa-cherasco/34.jpg
 layout: wide
 header: white
-excerpt: Una villetta di nuova costruzione pensata dalle fondamenta, dove ogni ambiente nasce già in dialogo con l'architettura.
+photos: Federica Borgato
+photosUrl: https://www.federicaborgato.com/
+excerpt: "Un progetto di interior design pensato dalle fondamenta, dove ogni ambiente nasce già in dialogo con l'architettura."
 order: 1
 ---
 
@@ -29,6 +31,6 @@ La cucina, aperta sul soggiorno, gioca sul contrasto tra le ante verde petrolio 
 
 Il soggiorno alterna elementi vintage, come la credenza in teak anni '60, a un mix di colori caldi (terracotta, senape, blu polvere) richiamati dal tappeto kilim e dai tessuti. Una libreria a giorno su misura organizza libri e oggetti personali, diventando quinta scenografica dell'ingresso.
 
-I bagni raccontano due anime diverse: uno più deciso, con cementine bicolore blu-grigio a contrasto con il bianco della vasca; l'altro più delicato, con motivo a stella grafico in bianco e nero, doccia walk-in e dettagli in legno naturale. Un progetto che unisce calore domestico e precisione progettuale, dimostrando come una nuova costruzione possa già avere carattere e memoria.
+I bagni raccontano due anime diverse: uno più deciso, con cementine bicolore blu-grigio a contrasto con il bianco della vasca; l'altro più delicato, con motivo a stella grafico in bianco e nero, doccia walk-in e dettagli in legno naturale (mobile lavabo, scaletta portasalviette).
 
-*Fotografie: Federica Borgato*
+Un progetto che unisce calore domestico e precisione progettuale, dimostrando come una nuova costruzione possa già avere carattere e memoria.

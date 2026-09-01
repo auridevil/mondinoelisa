@@ -1,7 +1,7 @@
 ---
-title: Appartamento a Fossano
+title: "Ristrutturazione di un appartamento in condominio"
 category: residenziale
-location: Fossano, CN
+location: "Fossano, CN"
 year: 2024
 cover: /projects/casa-br/17.jpg
 gallery:
@@ -20,16 +20,18 @@ gallery:
 video: /projects/casa-br/clip.mp4
 layout: wide
 header: white
-excerpt: Ristrutturazione completa di un appartamento in condominio, tra continuità visiva, materiali naturali e luce.
+photos: Federica Borgato
+photosUrl: https://www.federicaborgato.com/
+excerpt: "Ristrutturazione completa di un appartamento in condominio, ripensato per ottenere ambienti contemporanei, funzionali e armoniosi."
 order: 4
 ---
 
-Un intervento di ristrutturazione completa che ridefinisce gli spazi di un appartamento in condominio, con l'obiettivo di creare ambienti contemporanei, funzionali e armoniosi. Il progetto si sviluppa attraverso un attento equilibrio tra continuità visiva, materiali naturali e un uso studiato della luce, elementi che conferiscono alla casa un'identità elegante e accogliente.
+Ristrutturazione completa di un appartamento in condominio, ripensato per ottenere ambienti contemporanei, funzionali e armoniosi. Continuità visiva, materiali naturali e un uso studiato della luce definiscono un'identità elegante e accogliente.
 
-Il fulcro dell'abitazione è la zona giorno open space, dove cucina, sala da pranzo e soggiorno convivono in un unico ambiente fluido. La cucina, sviluppata a L, combina ante lisce dai toni chiari con una colonna a tutta altezza in laminato materico scuro. Il soggiorno è valorizzato da una parete attrezzata realizzata su misura, con libreria a giorno e vani contenitivi, impreziosita da una carta da parati botanica che diventa il principale elemento decorativo dell'ambiente.
+Cuore della casa è la zona giorno open space, dove cucina, pranzo e soggiorno convivono in un unico ambiente fluido. La cucina a L accosta ante lisce dai toni chiari a una colonna a tutta altezza in laminato materico scuro, con forno e microonde a incasso. Nel soggiorno, una parete attrezzata su misura con libreria a giorno e vani contenitivi dialoga con una carta da parati botanica, principale elemento decorativo dell'ambiente.
 
-La camera matrimoniale è progettata come un ambiente intimo e rilassante, caratterizzato da tonalità calde e finiture in legno scuro, con applique orientabili a incasso e un ampio armadio con ante scorrevoli in vetro fumé. I due bagni esprimono linguaggi differenti ma coerenti: il primo, più raccolto, è rivestito da una carta da parati effetto tropicale a foglie che avvolge la zona doccia; il secondo, dal carattere più deciso, è definito da una boiserie in gres color terracotta con piastrelle a delicato decoro floreale.
+L'ingresso accoglie con una nicchia arredata da specchio, seduta imbottita e cuscino color senape, che amplifica la percezione della profondità. Nella zona notte, un taglio di luce lineare verticale scandisce il ritmo delle porte lungo il disimpegno. La camera matrimoniale unisce tonalità calde e legno scuro, con applique orientabili a incasso sopra la testata e un ampio armadio con ante scorrevoli in vetro fumé.
 
-Nel complesso, il progetto lavora per stratificazioni: superfici neutre come base, materiali caldi — legno, laminati materici — come struttura, e inserti decorativi — carte da parati, tessuti, dettagli in nero opaco — come accento.
+I due bagni parlano linguaggi diversi ma coerenti: nel primo una carta da parati effetto tropicale avvolge la zona doccia; nel secondo una boiserie in gres color terracotta si completa con piastrelle a delicato decoro floreale, sanitari sospesi bianchi e rubinetteria nera opaca.
 
-*Fotografie: Federica Borgato*
+Un progetto costruito per stratificazioni: superfici neutre come base, materiali caldi come struttura, inserti decorativi come accento.

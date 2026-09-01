@@ -22,7 +22,7 @@ export default function CategoryPage({ category }: { category: Category }) {
         {visibleCategories.map((c) => (
           <Link
             key={c.slug}
-            to={`/lavori/${c.slug}`}
+            to={`/work/${c.slug}`}
             aria-current={c.slug === category.slug ? 'page' : undefined}
           >
             {c.label}

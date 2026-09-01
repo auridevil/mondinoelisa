@@ -6,11 +6,11 @@ export default function Contact() {
   return (
     <>
       <Head>
-        <title>Contatti — Elisa Mondino</title>
+        <title>Contact — Elisa Mondino</title>
       </Head>
 
       <Reveal>
-        <h1 className="page__title">Contatti</h1>
+        <h1 className="page__title">Contact</h1>
       </Reveal>
 
       <div className="contact">

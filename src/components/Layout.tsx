@@ -9,7 +9,7 @@ import { projects } from '../lib/content'
  * The theme is decided per-route here and applied to the whole
  * viewport — header and footer included — with a soft transition.
  */
-const DARK_ROUTES = ['/contatti']
+const DARK_ROUTES = ['/contact']
 
 function themeFor(pathname: string): 'light' | 'dark' {
   return DARK_ROUTES.includes(pathname.replace(/\/$/, '') || '/') ? 'dark' : 'light'
@@ -23,7 +23,7 @@ export default function Layout() {
   // project's frontmatter (`header: white | black`) sets their color.
   const clean = pathname.replace(/\/$/, '') || '/'
   const project = projects.find(
-    (p) => clean === `/lavori/${p.category}/${p.slug}`,
+    (p) => clean === `/work/${p.category}/${p.slug}`,
   )
 
   // Always open a page from the top.

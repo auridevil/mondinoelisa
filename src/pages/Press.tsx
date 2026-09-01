@@ -6,11 +6,11 @@ export default function Press() {
   return (
     <>
       <Head>
-        <title>Stampa — Elisa Mondino</title>
+        <title>Press — Elisa Mondino</title>
       </Head>
 
       <Reveal>
-        <h1 className="page__title">Stampa</h1>
+        <h1 className="page__title">Press</h1>
       </Reveal>
 
       <ul className="press">

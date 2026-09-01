@@ -1,5 +1,6 @@
 import fm from 'front-matter'
 import { marked } from 'marked'
+import imageSizes from '../content/image-sizes.json'
 
 /**
  * Build-time content loading.
@@ -10,12 +11,14 @@ import { marked } from 'marked'
  * generated HTML already contains everything — no fetching at runtime.
  */
 
-export type ProjectLayout = 'standard' | 'wide' | 'duo'
+export type ProjectLayout = 'standard' | 'wide'
 
 export interface Project {
   slug: string
   category: string
   title: string
+  /** Second line under the title — the rest of Elisa's own heading. */
+  subtitle?: string
   location: string
   year: number
   area?: string
@@ -29,6 +32,12 @@ export interface Project {
   header: 'white' | 'black'
   excerpt: string
   order: number
+  /** Credit line for the photography, shown under the gallery. */
+  photos?: string
+  /** Optional website for the photographer. */
+  photosUrl?: string
+  /** Whether the project may appear in the home collage. */
+  home: boolean
   /** Markdown body rendered to HTML at build time. */
   html: string
 }
@@ -43,11 +52,15 @@ export interface PressItem {
 
 /** Frontmatter fields; layout, order, gallery and header fall back to defaults. */
 interface ProjectFrontmatter
-  extends Omit<Project, 'slug' | 'html' | 'layout' | 'order' | 'gallery' | 'header'> {
+  extends Omit<
+    Project,
+    'slug' | 'html' | 'layout' | 'order' | 'gallery' | 'header' | 'home'
+  > {
   layout?: ProjectLayout
   order?: number
   gallery?: string[]
   header?: 'white' | 'black'
+  home?: boolean
 }
 
 const projectFiles = import.meta.glob('../content/projects/*/*.md', {
@@ -68,6 +81,7 @@ export const projects: Project[] = Object.entries(projectFiles)
       order: 99,
       gallery: [],
       header: 'white' as const,
+      home: true,
       ...attributes,
       slug: slugFromPath(path),
       html: marked.parse(body) as string,
@@ -77,6 +91,44 @@ export const projects: Project[] = Object.entries(projectFiles)
 
 export function projectsByCategory(category: string): Project[] {
   return projects.filter((p) => p.category === category)
+}
+
+/** Projects allowed in the home collage (`home: false` opts one out). */
+export const homeProjects: Project[] = projects.filter((p) => p.home)
+
+/* ---------- Image orientation ---------- */
+
+const sizes = imageSizes as Record<string, number[]>
+
+/** Width ÷ height, from the build-time manifest. Falls back to 3:2. */
+export function aspectRatio(src: string): number {
+  const size = sizes[src]
+  return size && size.length === 2 ? size[0] / size[1] : 1.5
+}
+
+export function isPortrait(src: string): boolean {
+  return aspectRatio(src) < 1
+}
+
+/**
+ * Group a gallery into rows for display.
+ *
+ * A landscape photo fills the width on its own; two portrait photos in a
+ * row are paired side by side. Shown full width a portrait shot is taller
+ * than the viewport, so you never see the whole picture — pairing them
+ * puts each one comfortably on screen and reads as a spread.
+ */
+export function galleryRows(gallery: string[]): string[][] {
+  const rows: string[][] = []
+  for (let i = 0; i < gallery.length; i++) {
+    if (isPortrait(gallery[i]) && i + 1 < gallery.length && isPortrait(gallery[i + 1])) {
+      rows.push([gallery[i], gallery[i + 1]])
+      i++
+    } else {
+      rows.push([gallery[i]])
+    }
+  }
+  return rows
 }
 
 const pressFiles = import.meta.glob('../content/press/*.md', {

@@ -286,10 +286,22 @@
 }
 
 .project__hero-title {
-  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
   font-weight: 300;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  max-width: 22ch;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
+.project__hero-sub {
+  margin-top: 1rem;
+  font-size: clamp(0.82rem, 1.4vw, 1rem);
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .project__hero .project__breadcrumb {
@@ -356,15 +368,38 @@
   background: var(--black);
 }
 
-/* Gallery — layout controlled by frontmatter (`layout:`). */
+/* Gallery — width from frontmatter (`layout:`), rows from image orientation.
+   Landscape photos run full width; portrait photos are paired two-up so the
+   whole picture fits on screen (see galleryRows() in lib/content.ts). */
 
 .project__gallery {
   display: grid;
   gap: 2.5rem;
 }
 
-.project__gallery img {
+.project__row {
+  display: flex;
+  gap: var(--gallery-gap, 1rem);
+}
+
+.project__row img {
   width: 100%;
+  display: block;
+}
+
+/* Paired portraits: flex-grow is each image's aspect ratio (set inline), so
+   the two share the row in proportion and end at the same height. The row
+   width is capped so the pair is never taller than the screen — the whole
+   point of pairing them in the first place. */
+.project__row--2 {
+  width: min(100%, calc(88svh * var(--row-ar, 1.4)));
+  margin-inline: auto;
+}
+
+.project__row--2 img {
+  width: 0;
+  flex-basis: 0;
+  object-fit: cover;
 }
 
 .project--standard .project__gallery {
@@ -376,17 +411,41 @@
   /* full-bleed: escape the page padding */
   margin-inline: calc(-1 * var(--space-page));
   gap: 1rem;
+  --gallery-gap: 1rem;
 }
 
-.project--duo .project__gallery {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+/* A lone portrait (odd count) is centred and capped to the viewport height
+   rather than running full width, where it would be taller than the screen. */
+.project__row--tall {
+  justify-content: center;
 }
 
+.project__row--tall img {
+  width: auto;
+  max-height: 88svh;
+  max-width: 100%;
+}
+
+/* On a phone the viewport is already portrait, so a tall photo reads fine
+   full width — and side by side they would be postage stamps. */
 @media (max-width: 720px) {
-  .project--duo .project__gallery {
+  .project__row--2 {
+    display: grid;
     grid-template-columns: 1fr;
   }
+  .project__row--2 img {
+    width: 100%;
+    flex-basis: auto;
+  }
+}
+
+.project__credit {
+  margin: 2.5rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
 }
 
 /* ---------- Studio / About ---------- */
@@ -419,8 +478,14 @@
   max-width: 40rem;
 }
 
-.about__text p + p {
+/* Each paragraph is wrapped in a <Reveal> div, so `p + p` never matches —
+   space the wrappers instead. */
+.about__text .reveal + .reveal > p {
   margin-top: 1.1em;
+}
+
+.about__text .reveal > p.about__press {
+  margin-top: 2.4rem;
 }
 
 .about__lead {

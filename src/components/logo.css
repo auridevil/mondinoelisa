@@ -1,115 +1,121 @@
-/* Logo "E—M" — see Logo.tsx for the concept. */
+/* Brand lockup + signature — both built on the E/M monogram (Monogram.tsx). */
+
+.monogram {
+  display: block;
+  height: 1em;
+  width: auto;
+  overflow: visible;
+  /* The mark is drawn at a 240×224 scale with an 11-unit stroke; keeping
+     the stroke non-scaling would break that ratio, so it scales with it. */
+}
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 .brand:hover {
   opacity: 1;
 }
 
-/* The stamp: initials joined by an em dash, inside a hairline box. */
 .brand__mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.16em;
-  padding: 0.32em 0.5em;
-  border: 1px solid currentColor;
-  font-family: var(--font-sans);
-  font-weight: 900;
-  font-size: 1.35rem;
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-size: 1.85rem; /* .monogram is sized in em */
+  flex: none;
 }
 
-.brand__dash {
-  width: 0.55em;
-  height: 0.085em;
-  background: currentColor;
-  transition: width 0.5s var(--ease-soft);
-}
-
-/* The measuring line extends on hover. */
-.brand:hover .brand__dash {
-  width: 1.15em;
-}
-
+/* Hairline rule between mark and wordmark, as on the brand board. */
 .brand__id {
   display: flex;
   flex-direction: column;
-  line-height: 1.35;
+  justify-content: center;
+  gap: 0.3em;
+  padding-left: 0.85rem;
+  border-left: 1px solid currentColor;
+  line-height: 1;
 }
 
 .brand__name {
   font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 0.82rem;
-  letter-spacing: 0.24em;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
 }
 
 .brand__role {
   font-family: var(--font-sans);
   font-weight: 300;
-  font-size: 0.6rem;
-  letter-spacing: 0.32em;
+  font-size: 0.56rem;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-/* ---------- Signature "EM INTERIOR DESIGN" (watermark variant) ---------- */
+@media (max-width: 640px) {
+  .brand {
+    gap: 0.6rem;
+  }
+  .brand__mark {
+    font-size: 1.5rem;
+  }
+  .brand__id {
+    padding-left: 0.6rem;
+  }
+  .brand__name {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+  }
+  .brand__role {
+    font-size: 0.5rem;
+    letter-spacing: 0.26em;
+  }
+}
+
+/* ---------- Signature (monogram over "INTERIOR DESIGN") ---------- */
 
 .sig {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.55em;
+  gap: 0.5em;
   font-family: var(--font-sans);
 }
 
 .sig__mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.16em;
-  padding: 0.3em 0.48em;
-  border: 1.5px solid currentColor;
-  font-weight: 900;
-  font-size: 1.15em;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.sig__dash {
-  width: 0.55em;
-  height: 0.09em;
-  background: currentColor;
+  font-size: 1em;
 }
 
 .sig__text {
-  font-weight: 500;
-  font-size: 0.42em;
+  font-weight: 400;
+  font-size: 0.26em;
   letter-spacing: 0.5em;
   text-indent: 0.5em; /* balances the trailing letter-spacing */
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-/* Signature on project heroes: signed bottom-right, like a canvas. */
+/* Signed bottom-right on project heroes, like a canvas. */
 .sig--hero {
   position: absolute;
   right: var(--space-page);
   bottom: 2.2rem;
-  font-size: 1.6rem;
+  font-size: 2.6rem;
   color: #fff;
   mix-blend-mode: difference;
   opacity: 0.85;
 }
 
-/* Signature in the footer, pushed to the right edge. */
+/* In the footer, pushed to the right edge. */
 .sig--footer {
-  font-size: 1.3rem;
+  font-size: 2rem;
   color: var(--muted);
   margin-left: auto;
+}
+
+@media (max-width: 720px) {
+  .sig--hero {
+    font-size: 1.9rem;
+    bottom: 1.4rem;
+  }
 }

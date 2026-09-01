@@ -1,7 +1,7 @@
 ---
-title: Ufficio del Turismo, Alba
+title: "Ufficio del Turismo di Alba"
 category: workspace
-location: Alba, CN
+location: "Alba, CN"
 year: 2024
 cover: /projects/ufficio-turistico-alba/01.jpg
 gallery:
@@ -13,12 +13,21 @@ gallery:
   - /projects/ufficio-turistico-alba/05.jpg
 layout: wide
 header: black
-excerpt: Uno spazio di accoglienza turistica nel cuore di Alba, tra vigneti retroilluminati e verde Langa.
+photos: Saglietti Group
+# Fuori dal collage della home (Elisa: niente workspace in apertura).
+home: false
+excerpt: "La riqualificazione dell'Ufficio del Turismo di Alba: uno spazio più accogliente, funzionale e rappresentativo del territorio."
 order: 1
 ---
 
-<!-- TODO: testo di sintesi da confermare con Elisa. -->
+Il progetto nasce dalla riqualificazione dell'Ufficio del Turismo di Alba, con l'obiettivo di trasformare gli spazi esistenti in un ambiente più accogliente, funzionale e rappresentativo del territorio.
 
-Uno spazio di accoglienza turistica nel centro storico di Alba, pensato per raccontare il territorio delle Langhe fin dalla soglia. Grandi immagini retroilluminate dei vigneti diventano quinte luminose che guidano il visitatore, mentre il verde profondo degli arredi richiama i colori della campagna.
+La progettazione ha lavorato sull'incontro tra contemporaneità e identità locale, attraverso l'utilizzo di materiali, colori e finiture ispirati alle Langhe. Il legno, le tonalità calde e i dettagli materici contribuiscono a creare un ambiente riconoscibile e ospitale, pensato per accogliere i visitatori e accompagnarli nella scoperta del territorio.
 
-Il bancone di accoglienza, gli espositori per il materiale informativo e le sedute si integrano in un progetto coerente e riconoscibile, che di sera trasforma la vetrina affacciata sulla via storica in una lanterna urbana.
+Particolare attenzione è stata dedicata alla distribuzione degli spazi e alla progettazione degli arredi, studiati per integrare le diverse funzioni dell'ufficio e valorizzare il materiale informativo e promozionale. Gli elementi su misura permettono di organizzare in modo ordinato le diverse aree, mantenendo un'immagine pulita e contemporanea.
+
+Il progetto è stato sviluppato in collaborazione con Saglietti Group, una partnership che ha permesso di unire progettazione, competenza artigianale e capacità realizzativa. Un confronto continuo tra progetto e cantiere ha accompagnato tutte le fasi dell'intervento, dalla definizione delle soluzioni alla loro realizzazione.
+
+Ho seguito il progetto e la direzione lavori, coordinando le diverse fasi del cantiere e mantenendo il dialogo tra progettazione, fornitori e maestranze, fino alla realizzazione dello spazio.
+
+Il risultato è un ambiente rinnovato, funzionale e contemporaneo, ma allo stesso tempo capace di esprimere attraverso i suoi materiali e le sue atmosfere il carattere e l'identità del territorio di Alba e delle Langhe.

@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite-react-ssg build",
-    "preview": "vite preview"
+    "build": "node scripts/gen-image-sizes.mjs && vite-react-ssg build",
+    "preview": "vite preview",
+    "image-sizes": "node scripts/gen-image-sizes.mjs"
   },
   "dependencies": {
     "front-matter": "^4.0.2",

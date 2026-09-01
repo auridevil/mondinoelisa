@@ -10,16 +10,16 @@ export default function Work() {
   return (
     <>
       <Head>
-        <title>Lavori — Elisa Mondino</title>
+        <title>Work — Elisa Mondino</title>
       </Head>
 
       <Reveal>
-        <h1 className="page__title">Lavori</h1>
+        <h1 className="page__title">Work</h1>
       </Reveal>
 
       <nav className="subnav" aria-label="Categorie">
         {visibleCategories.map((c) => (
-          <Link key={c.slug} to={`/lavori/${c.slug}`}>
+          <Link key={c.slug} to={`/work/${c.slug}`}>
             {c.label}
           </Link>
         ))}
@@ -32,7 +32,7 @@ export default function Work() {
           <section key={c.slug} className="section">
             <Reveal>
               <h2 className="section__label">
-                <Link to={`/lavori/${c.slug}`}>{c.label}</Link>
+                <Link to={`/work/${c.slug}`}>{c.label}</Link>
               </h2>
             </Reveal>
             <div className="grid">

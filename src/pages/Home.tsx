@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import { Head } from 'vite-react-ssg'
 import { Reveal } from '../components/Reveal'
 import { ProjectCard } from '../components/ProjectCard'
-import { visibleCategories } from '../content/categories'
-import { projects, projectsByCategory, type Project } from '../lib/content'
+import { aspectRatio, homeProjects, type Project } from '../lib/content'
 
 /** How many images the home collage shows. */
 const COLLAGE_SIZE = 8
@@ -19,55 +18,80 @@ function shuffle<T>(list: T[]): T[] {
   return out
 }
 
-const RATIOS = ['3 / 2', '4 / 3', '3 / 4', '2 / 3', '1 / 1', '16 / 9']
-
 /**
  * Random placement for one collage item — regenerated on every page load.
- * Spans, positions and vertical offsets are deliberately extreme: images
- * can drift anywhere on the 12-column grid and overlap each other.
+ * Positions and vertical offsets are deliberately extreme: images can drift
+ * anywhere on the 12-column grid and overlap each other.
+ *
+ * Each photo keeps its own aspect ratio (nothing is cropped to a random
+ * shape), so the column span is drawn from the orientation instead: a
+ * portrait shot gets a narrower span, or it would tower over the page.
  *
  * The first two items can only shift downwards, so nothing ever rises
  * above the collage and covers the logo or the menu.
  */
-function randomPlacement(index: number): CSSProperties {
-  const span = 3 + Math.floor(Math.random() * 5) // 3–7 columns wide
+function randomPlacement(index: number, ratio: number): CSSProperties {
+  const [min, range] = ratio < 1 ? [3, 3] : [4, 4] // portrait 3–5, landscape 4–7
+  const span = min + Math.floor(Math.random() * range)
   const start = 1 + Math.floor(Math.random() * (13 - span)) // anywhere
   const offset =
     index < 2
       ? Math.floor(Math.random() * 9) // first row: 0 … +8rem only
       : -6 + Math.floor(Math.random() * 19) // below: -6rem … +12rem → overlap
-  const ratio = RATIOS[Math.floor(Math.random() * RATIOS.length)]
 
   return {
     '--col': `${start} / span ${span}`,
     '--offset': `${offset}rem`,
-    '--ratio': ratio,
+    '--ratio': `${ratio}`,
     '--float-dur': `${7 + Math.random() * 6}s`, // each image bobs at its own pace
     '--float-delay': `${-Math.random() * 8}s`,
     zIndex: 1 + Math.floor(Math.random() * 5),
   } as CSSProperties
 }
 
+/** One image in the collage, and the project it links to. */
+interface Tile {
+  project: Project
+  image: string
+}
+
 interface Collage {
-  items: Project[]
+  items: Tile[]
   placements: CSSProperties[]
 }
 
+/**
+ * The pool of tiles: each project's cover first, then its gallery shots,
+ * taken round-robin so consecutive tiles come from different projects.
+ * Drawing photos rather than projects keeps the collage full even when
+ * only a handful of projects are eligible for the home page.
+ */
+const TILES: Tile[] = (() => {
+  const out: Tile[] = []
+  const perProject = homeProjects.map((p) => [p.cover, ...p.gallery])
+  const deepest = Math.max(0, ...perProject.map((list) => list.length))
+  for (let depth = 0; depth < deepest; depth++) {
+    homeProjects.forEach((project, i) => {
+      const image = perProject[i][depth]
+      if (image) out.push({ project, image })
+    })
+  }
+  return out
+})()
+
 export default function Home() {
   // Deterministic default for the prerendered HTML (and no-JS visitors):
-  // up to two projects per category, in category order.
-  const initial = visibleCategories.flatMap((c) =>
-    projectsByCategory(c.slug).slice(0, 2),
-  )
+  // the first tiles, i.e. every project's cover in order.
+  const initial = TILES.slice(0, COLLAGE_SIZE)
 
   // After mount, both the selection/order of projects AND their placements
   // are randomized — every reload shows a different collage.
   const [collage, setCollage] = useState<Collage | null>(null)
   useEffect(() => {
-    const items = shuffle(projects).slice(0, COLLAGE_SIZE)
+    const items = shuffle(TILES).slice(0, COLLAGE_SIZE)
     setCollage({
       items,
-      placements: items.map((_, i) => randomPlacement(i)),
+      placements: items.map((tile, i) => randomPlacement(i, aspectRatio(tile.image))),
     })
   }, [])
 
@@ -128,17 +152,23 @@ export default function Home() {
       </Head>
 
       <section className="collage" aria-label="Progetti" ref={collageRef}>
-        {items.map((p, i) => (
-          <div key={p.slug} className="collage__item" style={placements?.[i]}>
+        {items.map((tile, i) => (
+          <div
+            key={tile.image}
+            className="collage__item"
+            style={
+              placements?.[i] ?? ({ '--ratio': `${aspectRatio(tile.image)}` } as CSSProperties)
+            }
+          >
             <Reveal delay={(i % 3) * 90}>
-              <ProjectCard project={p} />
+              <ProjectCard project={tile.project} image={tile.image} />
             </Reveal>
           </div>
         ))}
       </section>
 
       <Reveal>
-        <Link to="/lavori" className="link-more">
+        <Link to="/work" className="link-more">
           Tutti i progetti →
         </Link>
       </Reveal>
