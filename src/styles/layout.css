@@ -128,6 +128,11 @@
 /* ---------- Footer ---------- */
 
 .footer {
+  /* Its own layer, above the collage items (z-index 1–5), with an opaque
+     background — a drifting home image must never paint over the footer. */
+  position: relative;
+  z-index: 10;
+  background: var(--bg);
   border-top: 1px solid var(--line);
   padding: 1.5rem var(--space-page) 2rem;
   font-size: 0.72rem;

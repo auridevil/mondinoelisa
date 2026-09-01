@@ -13,6 +13,10 @@
   gap: 4.5rem 2rem;
   align-items: start;
   padding-top: 1.5rem;
+  /* Room for the drift (MAX_DRIFT in Home.tsx), which is a transform and so
+     reserves no space of its own — without this the lowest image lands on
+     whatever follows the collage. */
+  padding-bottom: 7rem;
 }
 
 .collage__item {
@@ -173,6 +177,8 @@
 
 .link-more {
   display: inline-block;
+  position: relative;
+  z-index: 6; /* above the collage items, which sit on layers 1–5 */
   margin-top: 3rem;
   font-size: 0.8rem;
   letter-spacing: 0.2em;

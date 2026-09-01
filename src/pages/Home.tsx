@@ -8,6 +8,15 @@ import { aspectRatio, homeProjects, type Project } from '../lib/content'
 /** How many images the home collage shows. */
 const COLLAGE_SIZE = 8
 
+/**
+ * Ceiling on the scroll-driven drift, in px.
+ *
+ * The drift is a transform, so it moves no layout: without a cap an image
+ * kept sliding down as the page got taller and ended up over the footer.
+ * `.collage` reserves this much space at the bottom to match.
+ */
+const MAX_DRIFT = 90
+
 /** Fisher–Yates shuffle (returns a new array). */
 function shuffle<T>(list: T[]): T[] {
   const out = [...list]
@@ -119,11 +128,12 @@ export default function Home() {
     let mx = 0
     let my = 0
     let raf = 0
+    const clamp = (v: number, limit: number) => Math.min(limit, Math.max(-limit, v))
     const render = () => {
       raf = 0
       for (let i = 0; i < items.length; i++) {
         const x = mx * depths[i].x
-        const y = window.scrollY * speeds[i] + my * depths[i].y
+        const y = clamp(window.scrollY * speeds[i], MAX_DRIFT) + my * depths[i].y
         items[i].style.transform = `translate3d(${x}px, ${y}px, 0)`
       }
     }
