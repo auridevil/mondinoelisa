@@ -29,8 +29,14 @@ function shuffle<T>(list: T[]): T[] {
 
 /**
  * Random placement for one collage item — regenerated on every page load.
- * Positions and vertical offsets are deliberately extreme: images can drift
- * anywhere on the 12-column grid and overlap each other.
+ *
+ * Items alternate between the left and right half of the 12-column grid.
+ * That is what makes them pair up: grid auto-placement only pushes an item
+ * onto a new row when its columns collide with the previous one, so letting
+ * the column start roam the full width put every photo on a row of its own
+ * and you saw exactly one per screen. Alternating halves keeps two per row
+ * while the random start, span and vertical offset keep it from reading as
+ * a tidy two-column grid.
  *
  * Each photo keeps its own aspect ratio (nothing is cropped to a random
  * shape), so the column span is drawn from the orientation instead: a
@@ -40,13 +46,16 @@ function shuffle<T>(list: T[]): T[] {
  * above the collage and covers the logo or the menu.
  */
 function randomPlacement(index: number, ratio: number): CSSProperties {
-  const [min, range] = ratio < 1 ? [3, 3] : [4, 4] // portrait 3–5, landscape 4–7
+  const [min, range] = ratio < 1 ? [3, 2] : [4, 2] // portrait 3–4, landscape 4–5
   const span = min + Math.floor(Math.random() * range)
-  const start = 1 + Math.floor(Math.random() * (13 - span)) // anywhere
+  // Even items live in columns 1–6, odd ones in 7–12, so consecutive items
+  // never collide and land side by side.
+  const lo = index % 2 === 0 ? 1 : 7
+  const start = lo + Math.floor(Math.random() * Math.max(1, 7 - span))
   const offset =
     index < 2
-      ? Math.floor(Math.random() * 9) // first row: 0 … +8rem only
-      : -6 + Math.floor(Math.random() * 19) // below: -6rem … +12rem → overlap
+      ? Math.floor(Math.random() * 5) // first row: 0 … +4rem only
+      : -3 + Math.floor(Math.random() * 10) // below: -3rem … +6rem → overlap
 
   return {
     '--col': `${start} / span ${span}`,

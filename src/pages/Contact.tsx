@@ -32,7 +32,14 @@ export default function Contact() {
                 Instagram
               </a>
             </li>
-            <li>{CONTACT.address}</li>
+            <li>
+              <span className="contact__label">Sede operativa</span>
+              {CONTACT.officeAddress}
+            </li>
+            <li>
+              <span className="contact__label">Sede legale</span>
+              {CONTACT.registeredAddress}
+            </li>
             <li>{CONTACT.vat}</li>
           </ul>
         </Reveal>

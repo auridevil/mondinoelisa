@@ -1,5 +1,5 @@
 ---
-title: "Ristrutturazione di un appartamento in condominio"
+title: "Appartamento in condominio"
 category: residenziale
 location: "Fossano, CN"
 year: 2024

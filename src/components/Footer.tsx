@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="footer__row">
-        <span>{CONTACT.address}</span>
+        <span>{CONTACT.officeAddress}</span>
         <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
         <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
         <span>{CONTACT.vat}</span>

@@ -10,7 +10,7 @@
 .collage {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 4.5rem 2rem;
+  gap: 3.5rem 2rem;
   align-items: start;
   padding-top: 1.5rem;
   /* Room for the drift (MAX_DRIFT in Home.tsx), which is a transform and so
@@ -55,23 +55,30 @@
   }
 }
 
-/* Fallback displacement before JS assigns random positions. */
+/* Fallback displacement before JS assigns random positions. Like the random
+   version, odd children take the left half and even children the right, so
+   auto-placement pairs them two to a row instead of stacking them one deep. */
+.collage__item:nth-child(odd) {
+  --col: 1 / span 5;
+}
+
+.collage__item:nth-child(even) {
+  --col: 7 / span 5;
+}
+
 .collage__item:nth-child(4n + 2) {
-  --col: 8 / span 5;
-  --offset: 6rem;
-  --ratio: 3 / 4;
+  --col: 8 / span 4;
+  --offset: 4rem;
 }
 
 .collage__item:nth-child(4n + 3) {
-  --col: 4 / span 5;
-  --offset: -4rem;
-  --ratio: 1 / 1;
+  --col: 2 / span 4;
+  --offset: -2rem;
 }
 
 .collage__item:nth-child(4n + 4) {
-  --col: 9 / span 3;
-  --offset: -2rem;
-  --ratio: 2 / 3;
+  --col: 7 / span 5;
+  --offset: 2rem;
 }
 
 /* Captions on the home collage: tiny, and revealed only on hover. */
@@ -602,4 +609,14 @@ a.press__row:hover {
   gap: 0.9rem;
   font-size: clamp(1rem, 2vw, 1.25rem);
   font-weight: 300;
+}
+
+/* Labels the two addresses apart without shouting. */
+.contact__label {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
 }

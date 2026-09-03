@@ -1,6 +1,7 @@
 import { Head } from 'vite-react-ssg'
 import { Reveal } from '../components/Reveal'
 import { pressItems } from '../lib/content'
+import { asset } from '../lib/asset'
 
 export default function Press() {
   return (
@@ -30,7 +31,7 @@ export default function Press() {
             <Reveal key={item.title} delay={i * 60}>
               <li>
                 {item.url ? (
-                  <a className="press__row" href={item.url} target="_blank" rel="noreferrer">
+                  <a className="press__row" href={asset(item.url)} target="_blank" rel="noreferrer">
                     {row}
                   </a>
                 ) : (

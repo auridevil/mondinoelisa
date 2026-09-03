@@ -5,4 +5,6 @@ outlet: Wine & Luxury
 # Solo l'anno è mostrato a sito; da confermare con Elisa l'uscita esatta.
 date: 2024-12-22
 excerpt: Un ritratto della designer, tra equilibrio e carattere. A cura di Viviana Pignelli, foto di Federica Borgato.
+# Il servizio completo (6 pagine, pp. 880-885) ospitato sul sito.
+url: /press/wine-luxury.pdf
 ---
