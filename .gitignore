@@ -1,4 +1,8 @@
-node_modules/
+node_modules
 dist/
 .DS_Store
 *.local
+
+# Elisa's Drive dumps — source photos/docs, ~640 MB, reference only. Never commit.
+drive-20260901/
+drive-download-*/
