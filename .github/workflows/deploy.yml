@@ -24,12 +24,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # BASE_PATH makes the build work on the github.io preview URL.
-      # ⚠️ When mondinoelisa.it DNS points to GitHub Pages: delete the env
-      # line below and re-add the custom domain in the repo's Pages settings.
+      # Served at the apex of mondinoelisa.it, so the build base stays "/".
+      # (BASE_PATH: /mondinoelisa/ was only needed for the github.io preview URL.)
       - run: npm run build
-        env:
-          BASE_PATH: /mondinoelisa/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

@@ -87,13 +87,16 @@ src/
 - [x] Logo: **E—M** in Satoshi Black — initials as the typographic *em* (unit of measure), dash stretches on hover (`Logo.tsx` + `logo.css`).
 - [x] Signature/watermark "**EM INTERIOR DESIGN**" (Elisa signs canvases with it): `Signature.tsx` — stamped bottom-right on project heroes (difference blend) and in the footer. Standalone assets for canvas/photo use in `brand/` (SVG + transparent PNG, white & black, PNGs rendered with real Satoshi glyphs).
 - [ ] About/bio copy for Elisa if a dedicated page is wanted.
-- [ ] Decide whether to license & self-host Satoshi vs. Fontshare CDN.
+- [x] Satoshi licensed & self-hosted (`public/fonts/satoshi/*.woff2` + `src/styles/fonts.css`); Fontshare CDN retired.
 - [x] Set up the GitHub Pages repo + Actions deploy → https://github.com/auridevil/mondinoelisa (public), Pages build_type=workflow.
-- [ ] **Go-live checklist** (site currently previews at https://auridevil.github.io/mondinoelisa/ — custom domain intentionally NOT active yet):
-  1. Point mondinoelisa.it DNS to GitHub Pages: A records 185.199.108.153 / 185.199.109.153 / 185.199.110.153 / 185.199.111.153 (today it points to Squarespace 198.49.23.x).
-  2. Delete the `BASE_PATH: /mondinoelisa/` env line in `.github/workflows/deploy.yml`.
-  3. Re-add the custom domain: `gh api -X PUT repos/auridevil/mondinoelisa/pages -f cname=mondinoelisa.it`.
-  4. Enable "Enforce HTTPS" in repo Pages settings once the certificate is issued.
+- [ ] **Go-live** — cutover from Squarespace to Pages, 2026-09-08:
+  1. [x] DNS. Squarespace stays the DNS host (registrar Tucows/OpenSRS, NS `nse1-4.squarespacedns.com`). The Squarespace **website preset** was deleted — that is what held the 4 apex A records (198.49.23.x / 198.185.159.x), the `www` CNAME → `ext-sq.squarespace.com` **and an HTTPS/SVCB (type 65) record** whose `ipv4hints` also pointed at Squarespace (browsers prefer those hints over A records, so it had to go). Replaced with **custom records**: 4 × `A @` → 185.199.108/109/110/111.153, `CNAME www` → `auridevil.github.io`.
+     ⚠️ Do **not** use "ADD PRESET" for a website — it restores Squarespace's records.
+     Kept presets: *Domain Connect* (`_domainconnect` CNAME) and *Email Security* (TXT `v=spf1 -all`, `_dmarc p=reject`, empty `_domainkey`) — they assert "this domain sends no mail". Revisit all three if `@mondinoelisa.it` email is ever wanted; there are no MX records today.
+  2. [x] `BASE_PATH: /mondinoelisa/` removed from `.github/workflows/deploy.yml` → build base is `/` again.
+  3. [x] Custom domain set: `gh api -X PUT repos/auridevil/mondinoelisa/pages -f cname=mondinoelisa.it` (needed because `build_type: workflow` means shipping `public/CNAME` alone does **not** set it).
+  4. [ ] Enforce HTTPS once the Let's Encrypt certificate is issued.
+  5. [ ] Optional: add the `_github-pages-challenge-auridevil` TXT record to verify the domain against takeover.
 
 ## Decisions log
 - 2026-07-02: Chose `vite-react-ssg` over Next.js/Astro to keep it lightweight React with true compile-time HTML and minimal config.
